@@ -1,0 +1,1 @@
+export const GoogleKey: string = 'AIzaSyCxjLYS8TiiKe3QyYLNCCPX0Df0oClH2ic';
