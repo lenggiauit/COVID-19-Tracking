@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Net.Http.Json;
-using System.Text.Json;
-using Microsoft.Extensions.Logging;
+using System.Net.Http.Json; 
+using Microsoft.Extensions.Logging; 
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace C19Tracking.ScheduledTasks.Implement
 {
@@ -24,26 +26,34 @@ namespace C19Tracking.ScheduledTasks.Implement
             _apiDataSettings = apiDataSettings.Value;
             _logger = logger;
         }
-        public async Task<JsonContent> SendAsync(string apiKey, Dictionary<string, string> headers)
+        public async Task<JObject> SendAsync(string apiKey, Dictionary<string, string> headers = null)
         {
             var apiOption = _apiDataSettings.ListAPIOptions.Where(c => c.Name.Equals(apiKey)).FirstOrDefault();
             if(apiOption != null)
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, apiOption.Url);
                 request.Headers.Add("Accept", "application/json");
-                foreach (var header in headers)
+                if (headers != null)
                 {
-                    request.Headers.Add(header.Key , header.Value);
-                }
-                
-                var client = _clientFactory.CreateClient(); 
+                    foreach (var header in headers)
+                    {
+                        request.Headers.Add(header.Key, header.Value);
+                    }
+                } 
+                var client = _clientFactory.CreateClient();
+                client.Timeout = TimeSpan.FromMinutes(15);
                 using var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
                 if (response.IsSuccessStatusCode)
                 { 
                     try
                     {
-                        return await response.Content.ReadFromJsonAsync<JsonContent>();
+                        using (Stream stream = await response.Content.ReadAsStreamAsync())
+                        using (StreamReader streamReader = new StreamReader(stream))
+                        using (JsonReader reader = new JsonTextReader(streamReader))
+                        { 
+                            return new JsonSerializer().Deserialize<JObject>(reader);
+                        } 
                     }
                     catch (NotSupportedException)  
                     {

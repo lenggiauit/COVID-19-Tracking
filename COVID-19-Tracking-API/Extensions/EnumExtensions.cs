@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace C19Tracking.API.Extensions
@@ -19,5 +20,21 @@ namespace C19Tracking.API.Extensions
             int.TryParse(number, out result); 
             return result;
         }
+
+        public static int ToInt(this JToken? token)
+        {
+            int result = 0;
+            if (token == null)
+            {
+                return result;
+            }
+            else
+            { 
+                int.TryParse(token.ToString(), out result);
+                return result;
+            }
+        }
+
+
     }
 }

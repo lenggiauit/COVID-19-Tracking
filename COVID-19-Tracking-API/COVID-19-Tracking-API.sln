@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COVID-19-Tracking-API", "COVID-19-Tracking-API.csproj", "{22A8E0BF-77A1-4152-B8A6-BA35EDAEDA71}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledTasks", "..\ScheduledTasks\ScheduledTasks.csproj", "{6E78CEF2-BF9A-4773-96FC-4473A2AF9FDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "COVID-19-Tracking-API", "COVID-19-Tracking-API.csproj", "{22A8E0BF-77A1-4152-B8A6-BA35EDAEDA71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{22A8E0BF-77A1-4152-B8A6-BA35EDAEDA71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22A8E0BF-77A1-4152-B8A6-BA35EDAEDA71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22A8E0BF-77A1-4152-B8A6-BA35EDAEDA71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E78CEF2-BF9A-4773-96FC-4473A2AF9FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E78CEF2-BF9A-4773-96FC-4473A2AF9FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E78CEF2-BF9A-4773-96FC-4473A2AF9FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E78CEF2-BF9A-4773-96FC-4473A2AF9FDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

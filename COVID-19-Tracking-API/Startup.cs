@@ -51,9 +51,14 @@ namespace C19Tracking.API
             {
                 options.Filters.Add(typeof(DelayFilter));
             })
-            .AddNewtonsoftJson();
-            services.AddMemoryCache();
-
+            .AddNewtonsoftJson(); 
+            services.AddDistributedMemoryCache();
+            //  Redis cache
+            //services.AddDistributedRedisCache(option =>
+            //{
+            //    option.Configuration = "[yourconnection string]";
+            //    option.InstanceName = "[your instance name]";
+            //});
             services.AddCustomSwagger();
             services.AddControllers();
             services.AddControllers().ConfigureApiBehaviorOptions(options =>
@@ -65,17 +70,24 @@ namespace C19Tracking.API
             services.AddDbContext<C19TrackingContext>();
             services.AddAutoMapper(typeof(Startup));
             // Services
-             
-            services.AddTransient<ITaskFactory, TaskFactory>(); 
 
-           // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            // Api Data Setting
+            var apiSettingsSection = Configuration.GetSection("APIDataSettings");
+            services.Configure<APIDataSettings>(apiSettingsSection);
 
+            services.AddTransient<ITaskFactory, TaskFactory>();
+
+            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddHttpClient();
             services.AddTransient<IC19TrackingHttpClientFactory, C19TrackingHttpClientFactory>();
              
             services.AddTransient<GetWHOData>();
             services.AddTransient<ProcessData>();
-            services.AddTransient<CleanUpData>();
-            services.AddTransient<SaveToCache>();
+            services.AddTransient<CleanUpRawData>();
+            services.AddTransient<SaveToDatabase>();
             services.AddTransient<TaskResolver>(serviceProvider => taskType =>
             {
                 switch (taskType)
@@ -84,10 +96,10 @@ namespace C19Tracking.API
                         return serviceProvider.GetService<GetWHOData>();
                     case FlowTask.ProcessData:
                         return serviceProvider.GetService<ProcessData>();
-                    case FlowTask.CleanUpData:
-                        return serviceProvider.GetService<CleanUpData>();
-                    case FlowTask.SaveToCache:
-                        return serviceProvider.GetService<SaveToCache>();
+                    case FlowTask.CleanUpRawData:
+                        return serviceProvider.GetService<CleanUpRawData>();
+                    case FlowTask.SaveToDatabase:
+                        return serviceProvider.GetService<SaveToDatabase>();
                     default:
                         return null;
                 }
@@ -96,12 +108,7 @@ namespace C19Tracking.API
             //
             services.AddHostedService<ScheduledService>();
 
-            // configure strongly typed settings objects
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-            // Api Data Setting
-            var apiSettingsSection = Configuration.GetSection("APIDataSettings");
-            services.Configure<APIDataSettings>(apiSettingsSection);
+           
             
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();

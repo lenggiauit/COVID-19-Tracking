@@ -1,5 +1,6 @@
 ﻿using C19Tracking.Domain.Helpers;
 using C19Tracking.ScheduledTasks.Interface;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -9,19 +10,22 @@ using System.Threading.Tasks;
 
 namespace C19Tracking.ScheduledTasks.Implement
 {
-    public class SaveToCache : ITaskBuilder
+    public class SaveToDatabase : ITaskBuilder
     {
-        private readonly ILogger<SaveToCache> _logger;
+        private readonly ILogger<SaveToDatabase> _logger;
         private readonly APIDataSettings _apiDataSettings;
-        public SaveToCache(ILogger<SaveToCache> logger,
-            IOptions<APIDataSettings> apiDataSettings)
+        private readonly IDistributedCache _distributedCache;
+        public SaveToDatabase(ILogger<SaveToDatabase> logger,
+            IOptions<APIDataSettings> apiDataSettings, IDistributedCache distributedCache)
         {
             _logger = logger;
             _apiDataSettings = apiDataSettings.Value;
+            _distributedCache = distributedCache;
         }
         public async Task<bool> Invoke(ILogger logger)
         {
-            _logger.LogInformation("SaveToCache Task running");
+            _logger.LogInformation("SaveToDatabase Task running");
+            // Do to implement
             return await Task.FromResult(true); 
         }
     }

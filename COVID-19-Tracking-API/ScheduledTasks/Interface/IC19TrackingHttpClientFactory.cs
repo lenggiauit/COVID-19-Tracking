@@ -1,5 +1,6 @@
 ﻿using C19Tracking.Domain.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace C19Tracking.ScheduledTasks.Interface
 {
     public interface IC19TrackingHttpClientFactory
     {
-        Task<JsonContent> SendAsync(string apiKey, Dictionary<string, string> headers);
+        Task<JObject> SendAsync(string apiKey, Dictionary<string, string> headers = null);
         Task PostJsonHttpClient(string apiKey, object value);
     }
 }

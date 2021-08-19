@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using C19Tracking.ScheduledTasks.Enums;
-using C19Tracking.ScheduledTasks.Interface;
-using Microsoft.Extensions.DependencyInjection;
+using C19Tracking.ScheduledTasks.Enums; 
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using static C19Tracking.API.Startup;
+using Microsoft.Extensions.Logging; 
 using TaskFactory = C19Tracking.ScheduledTasks.Implement.TaskFactory;
 namespace C19Tracking.ScheduledTasks
 {
@@ -19,8 +16,7 @@ namespace C19Tracking.ScheduledTasks
 
         public ScheduledService(ILogger<ScheduledService> logger, TaskResolver taskResolver)
         {
-            _logger = logger;
-            //_iTaskFactory = iTaskFactory;
+            _logger = logger; 
             _taskResolver = taskResolver;
         }
 
@@ -28,16 +24,15 @@ namespace C19Tracking.ScheduledTasks
         {
             _logger.LogInformation("Scheduled Service is running.");
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(50));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(1));
             TaskFactory taskFactory = new TaskFactory();
             foreach (FlowTask flowTask in Enum.GetValues(typeof( FlowTask)))
             {
                 var taskbuider =  taskFactory.CreateInstant(flowTask.ToString(), _taskResolver);
-             
-                if(!taskbuider.Invoke(_logger).Result)
+                var result = taskbuider.Invoke(_logger).Result;
+                if (!result)
                 {
-                    _logger.LogError($"Task failed: { flowTask.ToString() }");
+                    _logger.LogError($"Task was failed: { flowTask}");
                     break;
                 }
             } 
@@ -46,18 +41,14 @@ namespace C19Tracking.ScheduledTasks
 
         private void DoWork(object state)
         {
-            var count = Interlocked.Increment(ref executionCount);
-
-            _logger.LogInformation(
-                "Scheduled Service is working. Count: {Count}", count);
+            var count = Interlocked.Increment(ref executionCount); 
+            _logger.LogInformation("Scheduled Service is working. Count: {Count}", count);
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Scheduled Service is stopping.");
-
-            _timer?.Change(Timeout.Infinite, 0);
-
+            _logger.LogInformation("Scheduled Service is stopping."); 
+            _timer?.Change(Timeout.Infinite, 0); 
             return Task.CompletedTask;
         }
 

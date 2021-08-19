@@ -10,6 +10,12 @@ namespace C19Tracking.ScheduledTasks.Implement
 {
     public class TaskFactory : ITaskFactory 
     {
+        /// <summary>
+        /// Create Instant of Task
+        /// </summary>
+        /// <param name="flowTaskName"></param>
+        /// <param name="taskResolver"></param>
+        /// <returns></returns>
         public ITaskBuilder CreateInstant(string flowTaskName, TaskResolver taskResolver)
         { 
             switch (flowTaskName)
@@ -18,10 +24,10 @@ namespace C19Tracking.ScheduledTasks.Implement
                     return (GetWHOData)taskResolver(FlowTask.GetWHOData);
                 case nameof(FlowTask.ProcessData):
                     return (ProcessData)taskResolver(FlowTask.ProcessData);
-                case nameof(FlowTask.CleanUpData):
-                    return (CleanUpData)taskResolver(FlowTask.CleanUpData);
-                case nameof(FlowTask.SaveToCache):
-                    return (SaveToCache)taskResolver(FlowTask.SaveToCache);
+                case nameof(FlowTask.CleanUpRawData):
+                    return (CleanUpRawData)taskResolver(FlowTask.CleanUpRawData);
+                case nameof(FlowTask.SaveToDatabase):
+                    return (SaveToDatabase)taskResolver(FlowTask.SaveToDatabase);
                 default:
                     return null; 
             }
