@@ -24,6 +24,25 @@ export enum Locale {
     VietNam = 'Việt Nam'
 }
 
+export interface ApiOptions {
+    Url: string;
+    Method: string;
+
+}
+
+export interface AppSetting {
+    X_RapidAPI_Key: string;
+    X_RapidAPI_Key: string;
+    X_Rapidapi_Host: string;
+    GetCountries: ApiOptions;
+    GetLatestCountryDataByCode: ApiOptions;
+    GetLatestCountryDataByName: ApiOptions;
+    GetLatestAllCountries: ApiOptions;
+    GetDailyReportByCountryCode: ApiOptions;
+    GetDailyReportByCountryName: ApiOptions;
+    GetDailyReportAllCountries: ApiOptions;
+}
+
 
 
 

@@ -1,13 +1,18 @@
 import React, { useState, createContext, useContext } from 'react';
+import { AppSetting } from '../type';
+
+let appSetting: AppSetting = require('../appSetting.json');
 
 export type AppContextType = {
     locale: string;
     setLocale: (string: string) => void;
+    appSetting: AppSetting;
 }
 
 export const AppContext = createContext<AppContextType>({
     locale: 'en',
     setLocale: locale => console.warn('No locale provider'),
+    appSetting: appSetting
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -18,7 +23,8 @@ export const AppProvider: React.FC = ({ children }) => {
 
     const provider = {
         locale,
-        setLocale
+        setLocale,
+        appSetting
     };
     return (
         <>

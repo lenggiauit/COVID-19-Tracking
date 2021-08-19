@@ -1,5 +1,8 @@
 {
+    "app_environment_message": "You are running this application in {0} mode.",
     "app_title": "Covid-19 Tracking",
     "home": "Home",
-    "home_title": "Số liệu Covid-19 tại:"
+    "home_title": "Số liệu Covid-19 tại:",
+    "who": "WHO",
+    "vaccinedata": "Vaccine Data"
 }

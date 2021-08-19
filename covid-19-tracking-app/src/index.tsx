@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import Routes from './routes/';
-
+import { AppSetting } from './type';
 ReactDOM.render(
   <React.StrictMode>
     <Routes />

@@ -1,31 +1,42 @@
 import React, { ReactElement } from 'react';
 import * as bt from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
-import { Translation } from '../../components/translation/'
-import Navigation from '../../components/navigation/'
-import { AppProvider } from '../../contexts/appContext';
-import { GetCurrentCountry } from '../../functions';
-
+import Layout from '../../components/layout';
+import { useAppContext } from '../../contexts/appContext';
 
 const Home: React.FC = (): ReactElement => {
-    const location = useLocation();
-    GetCurrentCountry();
+    const { locale, setLocale, appSetting } = useAppContext();
+
+    var axios = require('axios');
+    var data = '';
+
+    var config = {
+        method: 'get',
+        url: 'https://covid19-update-api.herokuapp.com/api/v1',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        data: data
+    };
+
+    axios(config)
+        .then(function (response: any) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error: any) {
+            console.log(error);
+        });
+
+
 
     return (
-        <>
-            <AppProvider>
-                <bt.Container className="justify-content-md-center" style={{ backgroundColor: "red" }}>
-                    <bt.Row>
-                        <Navigation />
-                        <bt.Col md style={{ backgroundColor: "#dffdfd" }}>1 of 1`11111111111111111111111</bt.Col>
-                        <bt.Col md style={{ backgroundColor: "#ccc" }}>1 of 2222222222222222222222222222</bt.Col>
-                        <bt.Col md style={{ backgroundColor: "#aaa" }}>1 of 3233333333333333333333333333</bt.Col>
-                    </bt.Row>
-                </bt.Container>
-
-                <h1><Translation tid="home" /></h1>
-            </AppProvider>
-        </>
+        <Layout>
+            <bt.Container>
+                <bt.Row>
+                    <bt.Col> {appSetting.GetCountries.Url} </bt.Col>
+                </bt.Row>
+            </bt.Container>
+        </Layout>
     )
 };
 
