@@ -1,4 +1,6 @@
 ﻿using C19Tracking.API.Domain.Services.Communication.Request;
+using C19Tracking.Domain.Models.Entities;
+using C19Tracking.Domain.Services.Communication.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,8 @@ namespace C19Tracking.API.Domain.Services
 {
     public interface IWhoService
     {
-        Task GetData(string request);
+        Task<Covid19Data> GetTotals(BaseRequest<string> request);
+
+
     }
 }

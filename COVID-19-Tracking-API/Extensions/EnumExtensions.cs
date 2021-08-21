@@ -35,6 +35,19 @@ namespace C19Tracking.API.Extensions
             }
         }
 
+        public static int ToInt(this string token)
+        {
+            int result = 0;
+            if (token == null)
+            {
+                return result;
+            }
+            else
+            {
+                int.TryParse(token.ToString(), out result);
+                return result;
+            }
+        }
 
     }
 }

@@ -2,10 +2,12 @@
 using C19Tracking.API.Infrastructure;
 using C19Tracking.Domain.Helpers;
 using C19Tracking.Domain.Models.Entities;
+using C19Tracking.ScheduledTasks.Converters;
 using C19Tracking.ScheduledTasks.Interface;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Nancy.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -33,22 +35,43 @@ namespace C19Tracking.ScheduledTasks.Implement
             {
                 foreach (CacheKeys cacheKey in Enum.GetValues(typeof(CacheKeys)))
                 {
-                   string jsonString =  await _distributedCache.GetStringAsync(ConvertCacheKey.GetRawKey(cacheKey).ToString());
-                   JObject jsonObj = JObject.Parse(jsonString);
-                    switch (cacheKey)
-                    {
-                        case CacheKeys.Totals:
+                    try
+                    { 
+                        string jsonString = await _distributedCache.GetStringAsync(ConvertCacheKey.GetRawKey(cacheKey).ToString());
+                        if (!string.IsNullOrEmpty(jsonString))
                         {
-                            Covid19Data covid19Data = new Covid19Data();
-                            covid19Data.Deaths = jsonObj["Deaths"].ToInt();
+                            switch (cacheKey)
+                            {
+                                case CacheKeys.Totals:
+                                    {
+                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                        TotalsConverter totalsConverter = new TotalsConverter(jsonObject); 
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), totalsConverter.Convert());
+                                    }
+                                    break;
+                                case CacheKeys.Today:
+                                case CacheKeys.Yesterday:
+                                    {
+                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                        TodayYesterdayConverter converter = new TodayYesterdayConverter(jsonObject);
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), converter.Convert());
+                                    }
+                                    break;
+                                case CacheKeys.ByRegion:
+                                    {
+                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                        RegionConverter regionConverter = new RegionConverter(jsonObject);
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), regionConverter.Convert());
+                                    }
+                                    break;
 
-
-
-                            string jsonStringCoverted = JsonConvert.SerializeObject(covid19Data);
-                            await _distributedCache.SetStringAsync(cacheKey.ToString(), jsonStringCoverted);
-                        } 
-                        break; 
-                    } 
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError($"ProcessData Task was failed: {ex.Message}");
+                    }
                 } 
                 return await Task.FromResult(true);
             }

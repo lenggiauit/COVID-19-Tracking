@@ -27,14 +27,14 @@ namespace C19Tracking.ScheduledTasks.Implement
         }
         public async Task<bool> Invoke(ILogger logger)
         {
-            _logger.LogInformation("GetWHOData Task running!"); 
-            JObject jData =  await _c19TrackingHttpClientFactory.SendAsync(Constants.WHOPageDataKey, null);
-            if(jData != null)
+            _logger.LogInformation("GetWHOData Task running!");
+            JObject jData = await _c19TrackingHttpClientFactory.SendAsync(Constants.WHOPageDataKey, null);
+            if (jData != null)
             {
                 var rawData = jData["result"]["pageContext"]["rawDataSets"];
                 await _distributedCache.SetStringAsync(CacheRawKeys.ByDayRaw.ToString(), rawData["byDay"].ToString());
-                await _distributedCache.SetStringAsync(CacheRawKeys.ByDayCumulativeRaw.ToString(), rawData["byDayCumulative"].ToString());
-                await _distributedCache.SetStringAsync(CacheRawKeys.DayGroupsRaw.ToString(), rawData["dayGroups"].ToString());
+                await _distributedCache.SetStringAsync(CacheRawKeys.ByDayCumulativeRaw.ToString(), rawData["byDayCumulative"].ToString() );
+                await _distributedCache.SetStringAsync(CacheRawKeys.DayGroupsRaw.ToString(), rawData["dayGroups"].ToString() );
                 await _distributedCache.SetStringAsync(CacheRawKeys.CountriesDailyChangeRaw.ToString(), rawData["countriesDailyChange"].ToString());
                 await _distributedCache.SetStringAsync(CacheRawKeys.ByCountryRaw.ToString(), rawData["byCountry"].ToString());
                 await _distributedCache.SetStringAsync(CacheRawKeys.CountryGroupsRaw.ToString(), rawData["countryGroups"].ToString());

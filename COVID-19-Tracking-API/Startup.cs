@@ -9,6 +9,7 @@ using C19Tracking.API.Persistence.Repositories;
 using C19Tracking.API.Services;
 using C19Tracking.Domain.Helpers;
 using C19Tracking.Infrastructure;
+using C19Tracking.Persistence.Repositories;
 using C19Tracking.ScheduledTasks;
 using C19Tracking.ScheduledTasks.Enums;
 using C19Tracking.ScheduledTasks.Implement;
@@ -51,9 +52,10 @@ namespace C19Tracking.API
             {
                 options.Filters.Add(typeof(DelayFilter));
             })
-            .AddNewtonsoftJson(); 
+            .AddNewtonsoftJson();
+            // Use microsoft DistributedMemoryCache
             services.AddDistributedMemoryCache();
-            //  Redis cache
+            // if you want to use Redis cache
             //services.AddDistributedRedisCache(option =>
             //{
             //    option.Configuration = "[yourconnection string]";
@@ -69,19 +71,14 @@ namespace C19Tracking.API
             services.AddCors();
             services.AddDbContext<C19TrackingContext>();
             services.AddAutoMapper(typeof(Startup));
-            // Services
-
+           
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
             // Api Data Setting
             var apiSettingsSection = Configuration.GetSection("APIDataSettings");
-            services.Configure<APIDataSettings>(apiSettingsSection);
-
-            services.AddTransient<ITaskFactory, TaskFactory>();
-
-            // services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddHttpClient();
+            services.Configure<APIDataSettings>(apiSettingsSection); 
+            services.AddTransient<ITaskFactory, TaskFactory>(); 
             services.AddTransient<IC19TrackingHttpClientFactory, C19TrackingHttpClientFactory>();
              
             services.AddTransient<GetWHOData>();
@@ -107,13 +104,16 @@ namespace C19Tracking.API
 
             //
             services.AddHostedService<ScheduledService>();
+            // services
+            services.AddScoped<IWhoService, WhoService>();
+            // Repositories
+            services.AddScoped<IWhoRepository, WhoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-           
-            
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
+            services.AddHttpClient();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

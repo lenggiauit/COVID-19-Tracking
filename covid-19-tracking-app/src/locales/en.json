@@ -4,5 +4,9 @@
     "home": "Home",
     "home_title": "Số liệu Covid-19 tại:",
     "who": "WHO",
-    "vaccinedata": "Vaccine Data"
+    "vaccinedata": "Vaccine Data",
+    "who_reported_desciption1": "Globally, as of ",
+    "who_reported_desciption2": ", there have been ",
+    "who_reported_desciption3": " confirmed cases of COVID-19, including ",
+    "who_reported_desciption4": " deaths, reported to WHO."
 }

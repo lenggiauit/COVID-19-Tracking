@@ -36,18 +36,7 @@ namespace C19Tracking.API.Persistence.Contexts
                 entity.Property(e => e.CreatedDate);
                 entity.Property(e => e.UpdateBy);
             });
-
-            modelBuilder.Entity<Role>().HasData(
-                new Role
-                {
-                    Id = roleId,
-                    RoleName = "Administrator",
-                    RoleColor = "#F0680A",
-                    IsPublish = true,
-                    IsActive = true
-                }
-            );
-
+             
             modelBuilder.Entity<Permission>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -60,20 +49,7 @@ namespace C19Tracking.API.Persistence.Contexts
                 entity.Property(e => e.CreatedDate);
                 entity.Property(e => e.UpdateBy);
             });
-
-
-            modelBuilder.Entity<Permission>().HasData(
-               new Permission
-               {
-                   Id = permissionId,
-                   PermissionName = "Administrator",
-                   PermissionCode = "Administrator",
-                   PermissionGroup = "Admin",
-                   IsActive = true
-               }
-
-            );
-
+             
             modelBuilder.Entity<PermissionInRole>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -92,8 +68,7 @@ namespace C19Tracking.API.Persistence.Contexts
                   PermissionId = permissionId,
               }
               );
-
-
+             
             modelBuilder.Entity<User>(entity =>
              {
                  entity.HasKey(e => e.Id);
@@ -115,56 +90,7 @@ namespace C19Tracking.API.Persistence.Contexts
                  entity.Property(e => e.CreatedDate);
                  entity.Property(e => e.UpdateBy);
              });
-
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    Id = userId,
-                    FirebaseUid = "S6hmQ2zmhQd3kKw5hguYKkmg0Wz1",
-                    UserName = "Admin",
-                    FirstName = "Giàu",
-                    LastName = "Lê Ngọc",
-                    Images = "https://scontent.fsgn4-1.fna.fbcdn.net/v/t31.0-8/17359301_1831231470465460_8548873343809066948_o.jpg?_nc_cat=100&_nc_ohc=MAJ76r4otogAX-OrKNB&_nc_ht=scontent.fsgn4-1.fna&oh=2ea8ae99b0a71fc53ea891bcc54c0f2b&oe=5EFE5A69",
-                    Password = "password1",
-                    RoleID = roleId,
-                    UserEmail = "lenggiauit@gmail.com",
-                    UserPhone = "+84 909458492",
-                    Address = "So 2, Duong N4, Phuong Son Ky, Tan Phu, Ho Chi Minh",
-                    Note = "Account admin",
-                    IsBanned = false,
-                    IsActive = true
-                }
-            );
-
-            modelBuilder.Entity<UserSetting>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.UserId);
-                entity.Property(e => e.SettingName);
-                entity.Property(e => e.SettingValue);
-                entity.Property(e => e.SettingValidation);
-                entity.Property(e => e.SettingHintText);
-                entity.Property(e => e.CreatedBy);
-                entity.Property(e => e.UpdateDate);
-                entity.Property(e => e.CreatedDate);
-                entity.Property(e => e.UpdateBy);
-            });
-
-            modelBuilder.Entity<UserSetting>().HasData(
-             new UserSetting
-             {
-                 Id = Guid.NewGuid(),
-                 UserId = userId,
-                 SettingName = "Setting 1",
-                 SettingValue = "Setting 1",
-                 SettingValidation = "",
-                 SettingHintText = "PE00000000000",
-             });
-
-
- 
-
-
+             
         }
     }
 }
