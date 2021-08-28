@@ -40,6 +40,7 @@ export interface AppSetting {
     X_RapidAPI_Key: string;
     X_Rapidapi_Host: string;
     BaseUrl: string;
+    ForceHideEnvironment: boolean;
     TotalsCase: ApiOptions;
     GetCountries: ApiOptions;
     GetLatestCountryDataByCode: ApiOptions;

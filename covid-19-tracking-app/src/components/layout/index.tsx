@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import * as bt from 'react-bootstrap';
 import Navigation from '../../components/navigation/'
 import { AppProvider } from '../../contexts/appContext';
-import ShowEnvironment from '../../components/showEnvironment';
+import EnvironmentInfo from '../environmentInfo';
 
 
 const Layout: React.FC = ({ children }): ReactElement => {
@@ -11,7 +11,7 @@ const Layout: React.FC = ({ children }): ReactElement => {
             <AppProvider>
                 <bt.Container className="justify-content-md-center">
                     <bt.Row>
-                        <ShowEnvironment />
+                        <EnvironmentInfo />
                         <Navigation />
                     </bt.Row>
                 </bt.Container>

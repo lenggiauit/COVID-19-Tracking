@@ -1,9 +1,13 @@
 import React from 'react';
 import * as bt from 'react-bootstrap';
 import { Translation } from '../translation';
+import { AppSetting } from '../../type';
 
-const ShowEnvironment: React.FC = () => {
-    if (process.env.NODE_ENV.toLocaleUpperCase() == 'DEVELOPMENT') {
+let appSetting: AppSetting = require('../../appSetting.json');
+
+
+const EnvironmentInfo: React.FC = () => {
+    if (process.env.NODE_ENV.toLocaleUpperCase() == 'DEVELOPMENT' && !appSetting.ForceHideEnvironment) {
         return (
             < bt.Alert variant='info' >
                 <small><Translation tid="app_environment_message" params={[process.env.NODE_ENV.toLocaleUpperCase()]} /></small>
@@ -15,7 +19,7 @@ const ShowEnvironment: React.FC = () => {
     }
 }
 
-export default ShowEnvironment;
+export default EnvironmentInfo;
 
 
 
