@@ -9,6 +9,6 @@ namespace C19Tracking.API.Domain.Repositories
 {
     public interface IWhoRepository
     {
-        Task<Covid19Data> GetTotals(BaseRequest<string> request);
+        Task<Covid19Data> GetTotals();
     }
 }

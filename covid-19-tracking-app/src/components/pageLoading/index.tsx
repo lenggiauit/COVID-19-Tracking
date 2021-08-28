@@ -1,13 +1,14 @@
 import React from 'react'
 import './loading.css';
-import * as bt from 'react-bootstrap';
+import Loader from 'react-loader-spinner';
 const PageLoading: React.FC = () => {
     return (
         <div className="page-loading-logo">
             <div className="logo">
-                <bt.Spinner animation="border" variant="info" />
+                <Loader type="Oval" color="#74b4ff" height="50" width="50" />
             </div>
         </div>
     )
 }
+
 export default PageLoading;

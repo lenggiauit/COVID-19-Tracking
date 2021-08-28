@@ -17,9 +17,9 @@ namespace C19Tracking.API.Services
             _unitOfWork = unitOfWork;
         }
          
-        public async Task<Covid19Data> GetTotals(BaseRequest<string> request)
+        public async Task<Covid19Data> GetTotals()
         {
-            return await _whoServiceRepository.GetTotals(request);
+            return await _whoServiceRepository.GetTotals();
         }
     }
 }

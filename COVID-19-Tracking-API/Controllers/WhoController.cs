@@ -37,11 +37,11 @@ namespace C19Tracking.Controllers
 
         }
         [HttpPost("totalsCase")]
-        public async Task<TotalsResponse> TotalsCase([FromBody] BaseRequest<string> request)
+        public async Task<TotalsResponse> TotalsCase()
         {
             if (ModelState.IsValid)
             {
-                var totals = await _whoServices.GetTotals(request);
+                var totals = await _whoServices.GetTotals();
                 var resources = _mapper.Map<Covid19Data,  TotalsResource>(totals);
                 return new TotalsResponse(resources);
             }

@@ -8,5 +8,8 @@
     "who_reported_desciption1": "Globally, as of ",
     "who_reported_desciption2": ", there have been ",
     "who_reported_desciption3": " confirmed cases of COVID-19, including ",
-    "who_reported_desciption4": " deaths, reported to WHO."
+    "who_reported_desciption4": " deaths, reported to WHO.",
+    "who_reported_owerview_title": "Overview",
+    "who_reported_byregion_title": "By Region",
+    "global_situation_title": "Global Situation"
 }

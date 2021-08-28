@@ -1,6 +1,7 @@
 import React, { ReactElement, Suspense, lazy } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import PageLoading from "../components/pageLoading";
+import GlobalSpinner from "../components/globalSpinner";
 import history from "../utils/history";
 
 const Home = lazy(() => {
@@ -41,6 +42,7 @@ const IndexRouter: React.FC = (): ReactElement => {
                     </Switch>
                 </Suspense>
             </Router>
+            <GlobalSpinner />
         </>
     );
 };

@@ -64,6 +64,11 @@ namespace C19Tracking.ScheduledTasks.Implement
                                         await _distributedCache.SetStringAsync(cacheKey.ToString(), regionConverter.Convert());
                                     }
                                     break;
+                                case CacheKeys.LastUpdate:
+                                    {
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), jsonString);
+                                    }
+                                    break;
 
                             }
                         }

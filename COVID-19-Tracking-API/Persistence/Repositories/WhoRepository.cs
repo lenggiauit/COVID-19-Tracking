@@ -22,12 +22,15 @@ namespace C19Tracking.Persistence.Repositories
             _distributedCache = distributedCache;
             _logger = logger;
         }
-        public async Task<Covid19Data> GetTotals(BaseRequest<string> request)
+        public async Task<Covid19Data> GetTotals()
         { 
             string jsonString =  await _distributedCache.GetStringAsync(CacheKeys.Totals.ToString());
             if (!string.IsNullOrEmpty(jsonString))
             {
-                return JsonConvert.DeserializeObject<Covid19Data>(jsonString);
+                string jsonUpdatedDate = await _distributedCache.GetStringAsync(CacheKeys.LastUpdate.ToString());
+                Covid19Data covid19Data = JsonConvert.DeserializeObject<Covid19Data>(jsonString);
+                covid19Data.UpdatedDate = DateTime.Parse(jsonUpdatedDate); 
+                return covid19Data;
             }
             else
             {

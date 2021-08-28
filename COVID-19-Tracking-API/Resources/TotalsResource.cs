@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace C19Tracking.Resources
 {
     public class TotalsResource : BaseResource
-    { 
+    {
+        public DateTime UpdatedDate { get; set; }
     }
 }

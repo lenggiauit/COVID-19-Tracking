@@ -7,7 +7,7 @@ import { AppProvider } from '../../contexts/appContext';
 const Navigation: React.FC = () => {
     return (
         <>
-            <bt.Navbar collapseOnSelect bg="light" variant="light" expand="lg">
+            <bt.Navbar collapseOnSelect variant="light" expand="lg">
                 <bt.Container>
                     <bt.Navbar.Brand href="/"><Translation tid="app_title" /></bt.Navbar.Brand>
                     <bt.Navbar.Toggle aria-controls="responsive-navbar-nav" />

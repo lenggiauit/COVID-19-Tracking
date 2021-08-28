@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace C19Tracking.Domain.Models.Entities
 {
     public class Covid19Data
-    {  
+    {
+        public DateTime UpdatedDate { get; set; }
         public decimal Deaths { get; set; }
         public decimal CumulativeDeaths { get; set; }
         public decimal DeathsLast7Days { get; set; }

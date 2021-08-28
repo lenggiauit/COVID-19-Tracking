@@ -10,7 +10,7 @@ namespace C19Tracking.API.Domain.Services
 {
     public interface IWhoService
     {
-        Task<Covid19Data> GetTotals(BaseRequest<string> request);
+        Task<Covid19Data> GetTotals();
 
 
     }

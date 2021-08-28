@@ -1,8 +1,6 @@
-export type TotalsRequest = {
 
-};
-
-export type Totals = {
+export type Covid19Data = {
+    updatedDate: any,
     deaths: any,
     cumulativeDeaths: any,
     deathsLast7Days: any,

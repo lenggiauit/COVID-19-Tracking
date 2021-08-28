@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace C19Tracking.Resources
 {
-    public class BaseResource
+    public partial class BaseResource
     {
         public decimal Deaths { get; set; }
         public decimal CumulativeDeaths { get; set; }
