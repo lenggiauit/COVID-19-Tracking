@@ -2,6 +2,7 @@
 using C19Tracking.API.Domain.Services;
 using C19Tracking.API.Domain.Services.Communication.Request;
 using C19Tracking.Domain.Models.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace C19Tracking.API.Services
@@ -16,7 +17,17 @@ namespace C19Tracking.API.Services
             this._whoServiceRepository = whoServiceRepository;
             _unitOfWork = unitOfWork;
         }
-         
+
+        public async Task<List<CovidDataByRegion>> GetListCaseByRegion()
+        {
+            return await _whoServiceRepository.GetListCaseByRegion();
+        }
+
+        public async Task<CovidDataByRegion> GetCaseByRegion(string regionCode)
+        {
+            return await _whoServiceRepository.GetCaseByRegion(regionCode);
+        }
+
         public async Task<Covid19Data> GetTotals()
         {
             return await _whoServiceRepository.GetTotals();

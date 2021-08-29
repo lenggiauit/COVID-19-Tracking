@@ -36,20 +36,35 @@ namespace C19Tracking.Controllers
             _appSettings = appSettings.Value;
 
         }
-        [HttpPost("totalsCase")]
-        public async Task<TotalsResponse> TotalsCase()
+        [HttpPost("GetTotalsCase")]
+        public async Task<TotalsResponse> GetTotalsCase()
+        { 
+            var totals = await _whoServices.GetTotals();
+            var resources = _mapper.Map<Covid19Data,  TotalsResource>(totals);
+            return new TotalsResponse(resources); 
+        }
+
+        [HttpPost("GetCaseByRegion")]
+        public async Task<CaseByRegionResponse> GetCaseByRegion(string regionCode)
         {
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(regionCode))
             {
-                var totals = await _whoServices.GetTotals();
-                var resources = _mapper.Map<Covid19Data,  TotalsResource>(totals);
-                return new TotalsResponse(resources);
+                var caseByRegion = await _whoServices.GetCaseByRegion(regionCode);
+                var resources = _mapper.Map<CovidDataByRegion, CaseByRegionResource>(caseByRegion);
+                return new CaseByRegionResponse(resources);
             }
             else
             {
-                return new TotalsResponse(string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
+                return new CaseByRegionResponse("RegionCode is required!");
             }
+        }
+        [HttpPost("GetAllCaseByRegion")]
+        public async Task<ListCaseByRegionResponse> GetListCaseByRegion()
+        {
+            var listCaseByRegion = await _whoServices.GetListCaseByRegion();
+            var resources = _mapper.Map<List<CovidDataByRegion>, List<CaseByRegionResource>>(listCaseByRegion);
+            return new ListCaseByRegionResponse(resources);
+        }
 
-        } 
     }
 }

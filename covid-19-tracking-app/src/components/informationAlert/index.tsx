@@ -5,7 +5,7 @@ import { useAppContext } from '../../contexts/appContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConverterLocaleDateString from "../../utils/converter";
-import { useGetTotalsCaseQuery } from '../../services/totalsCaseAPI';
+import { useGetTotalsCaseQuery } from '../../services/getTotalsCase';
 import LocalSpinner from "../localSpinner";
 
 

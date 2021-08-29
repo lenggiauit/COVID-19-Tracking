@@ -22,6 +22,46 @@ namespace C19Tracking.Persistence.Repositories
             _distributedCache = distributedCache;
             _logger = logger;
         }
+        /// <summary>
+        /// Get case by region code
+        /// </summary>
+        /// <param name="regionCode"></param>
+        /// <returns></returns>
+
+        public async Task<CovidDataByRegion> GetCaseByRegion(string regionCode)
+        {
+            string jsonString = await _distributedCache.GetStringAsync(CacheKeys.ByRegion.ToString());
+            if (!string.IsNullOrEmpty(jsonString))
+            {  
+                List<CovidDataByRegion> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByRegion>>(jsonString);  
+                return covid19DataList.Where( l => l.RegionCode.Equals(regionCode, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.ByRegion} is empty!");
+                return null;
+            }
+        }
+
+        public async Task<List<CovidDataByRegion>> GetListCaseByRegion()
+        {
+            string jsonString = await _distributedCache.GetStringAsync(CacheKeys.ByRegion.ToString());
+            if (!string.IsNullOrEmpty(jsonString))
+            {
+                List<CovidDataByRegion> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByRegion>>(jsonString);
+                return covid19DataList;
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.ByRegion} is empty!");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get total case covid from cache
+        /// </summary>
+        /// <returns></returns>
         public async Task<Covid19Data> GetTotals()
         { 
             string jsonString =  await _distributedCache.GetStringAsync(CacheKeys.Totals.ToString());
@@ -38,5 +78,11 @@ namespace C19Tracking.Persistence.Repositories
                 return null;
             } 
         }
+
+
+
+
+
+
     }
 }

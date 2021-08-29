@@ -10,6 +10,10 @@ namespace C19Tracking.API.Mapping
         public AutoMapperProfile()
         { 
             CreateMap<Covid19Data, TotalsResource>();
+            CreateMap<CovidDataByRegion, CaseByRegionResource>();
+
+
+            
 
         }
     }

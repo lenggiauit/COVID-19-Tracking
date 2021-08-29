@@ -10,5 +10,10 @@ namespace C19Tracking.API.Domain.Repositories
     public interface IWhoRepository
     {
         Task<Covid19Data> GetTotals();
+        Task<CovidDataByRegion> GetCaseByRegion(string regionCode);
+        Task<List<CovidDataByRegion>> GetListCaseByRegion();
+
+        
+
     }
 }
