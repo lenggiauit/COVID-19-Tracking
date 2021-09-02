@@ -11,5 +11,15 @@
     "who_reported_desciption4": " trường hợp tử vong, được báo cáo cho WHO.",
     "who_reported_owerview_title": "Tổng quan",
     "who_reported_byregion_title": "Theo khu vực",
-    "global_situation_title": "Tình hình toàn cầu"
+    "global_situation_title": "Tình hình toàn cầu",
+    "AMRO": "Châu Mỹ ",
+    "EURO": "Châu Âu",
+    "SEARO": "Đông Nam Á",
+    "EMRO": "Đông Địa Trung Hải",
+    "WPRO": "Tây Thái Bình Dương",
+    "AFRO": "Châu Phi",
+    "OTHER": "Khác",
+    "Confirmed": "Ca nhiễm",
+    "Deaths": "Tử vong",
+    "Situation_by_WHO_Region": "Tình hình theo khu vực của WHO"
 }

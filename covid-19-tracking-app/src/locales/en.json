@@ -11,5 +11,15 @@
     "who_reported_desciption4": " deaths, reported to WHO.",
     "who_reported_owerview_title": "Overview",
     "who_reported_byregion_title": "By Region",
-    "global_situation_title": "Global Situation"
+    "global_situation_title": "Global Situation",
+    "AMRO": "Americas",
+    "EURO": "Europe",
+    "SEARO": "South-East Asia",
+    "EMRO": "Eastern Mediterranean",
+    "WPRO": "Western Pacific",
+    "AFRO": "Africa",
+    "OTHER": "Other",
+    "Confirmed": "Confirmed",
+    "Deaths": "Deaths",
+    "Situation_by_WHO_Region": "Situation by WHO Region"
 }

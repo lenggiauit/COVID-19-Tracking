@@ -1,0 +1,65 @@
+.region-image {
+    width: 100%;
+    min-width: 200px;
+    /* background: url("ContinentalIcons.svg"); */
+    /* background: url("World.png"); */
+    /* background: url("regions.svg"); */
+    background: url("5372261.png");
+
+    background-repeat: no-repeat;
+    background-size: 50%;
+    min-height: 180px;
+    background-position: 5% 28%;
+}
+.region-image-none {
+    width: 100%;
+    min-width: 200px;
+    min-height: 180px;
+}
+.region-image-amro {
+    background-position: 20% 28%;
+}
+.region-image-euro {
+    background-position: 20% 28%;
+}
+.region-image-searo {
+    background-position: 20% 28%;
+}
+.region-image-emro {
+    background-position: 20% 28%;
+}
+.region-image-wpro {
+    background-position: 20% 28%;
+}
+.region-image-afro {
+    background-position: 20% 28%;
+}
+.region-image-other {
+    background-position: 20% 28%;
+}
+.region-item-body:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+    cursor: pointer;
+}
+/*  ProgressBar  */
+.progress-bar.bg-amro {
+    background-color: rgb(255, 187, 48);
+}
+.progress-bar.bg-euro {
+    background-color: rgb(200, 214, 91);
+}
+.progress-bar.bg-searo {
+    background-color: rgb(82, 0, 174);
+}
+.progress-bar.bg-emro {
+    background-color: rgb(0, 174, 143);
+}
+.progress-bar.bg-wpro {
+    background-color: rgb(193, 37, 146);
+}
+.progress-bar.bg-afro {
+    background-color: rgb(10, 113, 213);
+}
+.progress-bar.bg-other {
+    background-color: rgb(71, 71, 71);
+}

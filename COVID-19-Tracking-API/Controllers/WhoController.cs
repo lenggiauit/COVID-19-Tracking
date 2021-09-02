@@ -58,6 +58,7 @@ namespace C19Tracking.Controllers
                 return new CaseByRegionResponse("RegionCode is required!");
             }
         }
+
         [HttpPost("GetAllCaseByRegion")]
         public async Task<ListCaseByRegionResponse> GetListCaseByRegion()
         {
