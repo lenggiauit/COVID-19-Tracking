@@ -2,41 +2,5 @@
     "X_RapidAPI_Key": "ef03e51cb5msh41bc6614f67a5bdp171025jsn2cc7e11cf6ba",
     "X_Rapidapi_Host": "covid-19-data.p.rapidapi.com",
     "BaseUrl": "https://localhost:5001",
-    "ForceHideEnvironment": true,
-    "TotalsCase": {
-        "Url": "https://localhost:5001/totalsCase",
-        "Method": "POST"
-    },
-    "GetCountries": {
-        "Url": "https://covid-19-data.p.rapidapi.com/help/countries",
-        "Method": "Get"
-    },
-    "GetLatestCountryDataByCode": {
-        "Url": "https://covid-19-data.p.rapidapi.com/country/code",
-        "Method": "Get"
-    },
-    "GetLatestCountryDataByName": {
-        "Url": "https://covid-19-data.p.rapidapi.com/country",
-        "Method": "Get"
-    },
-    "GetLatestAllCountries": {
-        "Url": "https://covid-19-data.p.rapidapi.com/country/all",
-        "Method": "Get"
-    },
-    "GetDailyReportByCountryCode": {
-        "Url": "https://covid-19-data.p.rapidapi.com/report/country/code",
-        "Method": "Get"
-    },
-    "GetDailyReportByCountryName": {
-        "Url": "https://covid-19-data.p.rapidapi.com/report/country/name",
-        "Method": "Get"
-    },
-    "GetDailyReportAllCountries": {
-        "Url": "https://covid-19-data.p.rapidapi.com/report/country/all",
-        "Method": "Get"
-    },
-    "GetWhoData": {
-        "Url": "https://covid19.who.int/page-data/index/page-data.json",
-        "Method": "Get"
-    }
+    "ForceHideEnvironment": true
 }

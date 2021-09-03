@@ -36,19 +36,8 @@ export interface ApiOptions {
 }
 
 export interface AppSetting {
-    X_RapidAPI_Key: string;
-    X_RapidAPI_Key: string;
-    X_Rapidapi_Host: string;
     BaseUrl: string;
     ForceHideEnvironment: boolean;
-    TotalsCase: ApiOptions;
-    GetCountries: ApiOptions;
-    GetLatestCountryDataByCode: ApiOptions;
-    GetLatestCountryDataByName: ApiOptions;
-    GetLatestAllCountries: ApiOptions;
-    GetDailyReportByCountryCode: ApiOptions;
-    GetDailyReportByCountryName: ApiOptions;
-    GetDailyReportAllCountries: ApiOptions;
 }
 
 export type ApiHeader = {

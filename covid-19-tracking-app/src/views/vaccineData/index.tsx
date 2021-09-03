@@ -10,7 +10,7 @@ const VaccineData: React.FC = (): ReactElement => {
         <Layout>
             <bt.Container>
                 <bt.Row>
-                    <bt.Col> {appSetting.GetCountries.Method} </bt.Col>
+                    <bt.Col></bt.Col>
                 </bt.Row>
             </bt.Container>
         </Layout>
