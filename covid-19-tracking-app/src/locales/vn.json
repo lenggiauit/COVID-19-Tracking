@@ -23,7 +23,7 @@
     "Deaths": "Tử vong",
     "Situation_by_WHO_Region": "Tình hình theo khu vực của WHO",
     "detail": "chi tiết",
-    "vaccinesUsed": "Vaccines được sử dụng",
-    "PersonFullyVaccinated": "Người được tiêm chủng đầy đủ",
-    "PersonVaccinated1PlusDose": "Người được tiêm chủng lần 1"
+    "vaccinesUsed": "Các loại vaccines được sử dụng",
+    "PersonFullyVaccinated": "Số người được tiêm chủng đầy đủ",
+    "PersonVaccinated1PlusDose": "Số người được tiêm chủng lần 1"
 }
