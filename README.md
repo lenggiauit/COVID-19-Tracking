@@ -6,6 +6,9 @@ I want to develop this application because I want to see quickly report from WHO
 # Tracking Covid 19 Solution Diagram
 
 ![Tracking Covid 19](https://user-images.githubusercontent.com/7054426/131284485-2d65b2aa-4a73-44dd-a290-173761ba9b39.jpg)
+# Tracking Covid 19 UI
+![image](https://user-images.githubusercontent.com/7054426/132070692-649f89b8-18c7-42b3-bfe8-f605a71ee4e2.png)
+
 
 
 
