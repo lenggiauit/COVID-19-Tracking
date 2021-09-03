@@ -24,7 +24,7 @@ namespace C19Tracking.ScheduledTasks
         {
             _logger.LogInformation("Scheduled Service is running.");
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(1));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(8));
             TaskFactory taskFactory = new TaskFactory();
             foreach (FlowTask flowTask in Enum.GetValues(typeof( FlowTask)))
             {
@@ -42,7 +42,7 @@ namespace C19Tracking.ScheduledTasks
         private void DoWork(object state)
         {
             var count = Interlocked.Increment(ref executionCount); 
-            _logger.LogInformation("Scheduled Service is working. Count: {Count}", count);
+            _logger.LogInformation("Scheduled Service is working. Time: {Count}", count);
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
