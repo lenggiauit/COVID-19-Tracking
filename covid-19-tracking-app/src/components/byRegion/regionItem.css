@@ -1,3 +1,7 @@
+.region-item-body:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+    cursor: pointer;
+}
 /*  ProgressBar  */
 .progress-bar.bg-amro {
     background-color: rgb(255, 187, 48);
