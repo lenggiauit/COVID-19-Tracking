@@ -18,3 +18,7 @@ export type Covid19Data = {
     avg7CasePop: any,
     avg7DeathPop: any
 };
+
+
+
+

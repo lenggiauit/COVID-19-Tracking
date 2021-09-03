@@ -5,9 +5,8 @@ import Placeholder from 'react-bootstrap/Placeholder';
 import { GetRandomBgColor } from '../../utils/functions';
 import "./regionItem.css";
 import { Translation } from '../translation';
-import { Doughnut } from 'react-chartjs-2';
 import { RegionColors } from '../../types/colors';
-
+import { uuid } from 'uuidv4';
 type Props = {
     data?: Covid19DataByRegion;
     max: number;
@@ -39,7 +38,7 @@ const RegionItem: React.FC<Props> = ({ data, max, selectedItem }) => {
                             <Translation tid="Confirmed" />
                         </small >
                     </div>
-                    <bt.ProgressBar variant={data.regionCode.toLocaleLowerCase()} now={data.confirmed == max ? 100 : (data.confirmed / max) * 100} />
+                    <bt.ProgressBar key={uuid()} variant={data.regionCode.toLocaleLowerCase()} now={data.confirmed == max ? 100 : (data.confirmed / max) * 100} />
                 </div>
             </>
         )

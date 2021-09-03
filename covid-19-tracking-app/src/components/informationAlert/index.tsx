@@ -29,7 +29,7 @@ const InformationAlert: React.FC = () => {
                                     </>
                                 }
                                 {error && <div>{JSON.stringify(error)}</div>}
-                                {!error && !isFetching &&
+                                {!error && !isFetching && data?.success &&
                                     <>
                                         <Translation tid="who_reported_desciption1" />
                                         {ConverterLocaleDateString(data?.resource.updatedDate)}

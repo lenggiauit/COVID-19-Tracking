@@ -66,8 +66,13 @@ export type ApiMethod = "POST" | "GET";
 export type ApiResponse<T> = {
     success: boolean,
     errorCode: any,
-    messages: any
+    messages: any,
     resource: T,
+};
+
+export type ApiRequest<T> = {
+    metaData?: MetaData,
+    payload: T
 };
 
 export type Paging = {
@@ -76,9 +81,9 @@ export type Paging = {
 }
 
 export type MetaData = {
-    paging: Paging;
-    sortBy: string[];
-    orderBy: string[];
+    paging: Paging,
+    sortBy: string[],
+    orderBy: string[],
 }
 
 

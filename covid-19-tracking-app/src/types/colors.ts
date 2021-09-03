@@ -1,4 +1,4 @@
-import { Dictionary } from "../type";
+import { Dictionary } from "./type";
 
 export const RegionColors: Dictionary<any> = {
     'AMRO': 'rgb(255, 187, 48)',

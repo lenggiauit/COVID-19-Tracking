@@ -1,4 +1,5 @@
 ﻿using C19Tracking.API.Domain.Services.Communication;
+using C19Tracking.API.Domain.Services.Communication.Response;
 using C19Tracking.Resources;
 using System;
 using System.Collections.Generic;

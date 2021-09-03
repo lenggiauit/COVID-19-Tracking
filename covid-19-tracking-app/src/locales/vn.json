@@ -21,5 +21,9 @@
     "OTHER": "Khác",
     "Confirmed": "Ca nhiễm",
     "Deaths": "Tử vong",
-    "Situation_by_WHO_Region": "Tình hình theo khu vực của WHO"
+    "Situation_by_WHO_Region": "Tình hình theo khu vực của WHO",
+    "detail": "chi tiết",
+    "vaccinesUsed": "Vaccines được sử dụng",
+    "PersonFullyVaccinated": "Người được tiêm chủng đầy đủ",
+    "PersonVaccinated1PlusDose": "Người được tiêm chủng lần 1"
 }

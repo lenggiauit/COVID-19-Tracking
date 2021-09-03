@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace C19Tracking.Domain.Models.Entities
 {
-    public class CovidDataByRegion : Covid19Data
+    public class CovidDataByDayGroup : CovidDataByRegion
     {
-        public string CountryCode { get; set; }
-        public string RegionCode { get; set; }
+        public DateTime ReportDate { get; set; } 
     }
 }

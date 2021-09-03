@@ -13,7 +13,6 @@ const Home: React.FC = (): ReactElement => {
     return (
         <Layout>
             <InformationAlert />
-
             <ByRegion />
         </Layout>
     )

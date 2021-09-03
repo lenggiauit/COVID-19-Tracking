@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using C19Tracking.Domain.Services.Communication.Response;
 using C19Tracking.Domain.Models.Entities;
 using C19Tracking.Resources;
+using C19Tracking.Domain.Services.Communication.Request;
 
 namespace C19Tracking.Controllers
 {
@@ -36,7 +37,7 @@ namespace C19Tracking.Controllers
             _appSettings = appSettings.Value;
 
         }
-        [HttpPost("GetTotalsCase")]
+        [HttpGet("GetTotalsCase")]
         public async Task<TotalsResponse> GetTotalsCase()
         { 
             var totals = await _whoServices.GetTotals();
@@ -44,22 +45,22 @@ namespace C19Tracking.Controllers
             return new TotalsResponse(resources); 
         }
 
-        [HttpPost("GetCaseByRegion")]
-        public async Task<CaseByRegionResponse> GetCaseByRegion(string regionCode)
+        [HttpPost("GetDetailByRegion")]
+        public async Task<CovidReportDetailResponse> GetDetailByRegion([FromBody]BaseRequest<CovidReportDetailRequest> request)
         {
-            if (!string.IsNullOrEmpty(regionCode))
+            if (ModelState.IsValid) 
             {
-                var caseByRegion = await _whoServices.GetCaseByRegion(regionCode);
-                var resources = _mapper.Map<CovidDataByRegion, CaseByRegionResource>(caseByRegion);
-                return new CaseByRegionResponse(resources);
+                var detail = await _whoServices.GetDetailByRegion(request);
+                var resources = _mapper.Map<CovidReportDetail, CovidReportDetailResource>(detail);
+                return new CovidReportDetailResponse(resources);
             }
             else
-            {
-                return new CaseByRegionResponse("RegionCode is required!");
+            { 
+                return new CovidReportDetailResponse(string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
             }
         }
 
-        [HttpPost("GetAllCaseByRegion")]
+        [HttpGet("GetAllCaseByRegion")]
         public async Task<ListCaseByRegionResponse> GetListCaseByRegion()
         {
             var listCaseByRegion = await _whoServices.GetListCaseByRegion();

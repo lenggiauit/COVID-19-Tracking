@@ -1,4 +1,4 @@
-import { Dictionary } from '../type';
+import { Dictionary } from '../types/type';
 import en from './en.json';
 import vn from './vn.json';
 export const dictionaryList: Dictionary<any> = { "en": en, "vn": vn };

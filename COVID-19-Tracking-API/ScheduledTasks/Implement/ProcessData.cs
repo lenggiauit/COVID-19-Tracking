@@ -69,6 +69,20 @@ namespace C19Tracking.ScheduledTasks.Implement
                                         await _distributedCache.SetStringAsync(cacheKey.ToString(), jsonString);
                                     }
                                     break;
+                                case CacheKeys.VaccineData:
+                                    {
+                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                        VaccineDataConverter vaccineDataConverter = new VaccineDataConverter(jsonObject);
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), vaccineDataConverter.Convert());
+                                    }
+                                    break;
+                                case CacheKeys.DayGroups:
+                                    {
+                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                        DayGroupsConverter dayGroupsConverter = new DayGroupsConverter(jsonObject);
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), dayGroupsConverter.Convert());
+                                    }
+                                    break;
 
                             }
                         }

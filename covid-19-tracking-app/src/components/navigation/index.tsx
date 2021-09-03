@@ -15,12 +15,12 @@ const Navigation: React.FC = () => {
                         <bt.Nav>
                             <bt.Nav.Link href="/"><Translation tid="home" /></bt.Nav.Link>
                         </bt.Nav>
-                        <bt.Nav>
+                        {/* <bt.Nav>
                             <bt.Nav.Link href="/who"><Translation tid="who" /></bt.Nav.Link>
                         </bt.Nav>
                         <bt.Nav>
                             <bt.Nav.Link href="/vaccinedata"><Translation tid="vaccinedata" /></bt.Nav.Link>
-                        </bt.Nav>
+                        </bt.Nav> */}
                         <bt.Nav className="me-auto"></bt.Nav>
                         <LanguageSelector />
                     </bt.Navbar.Collapse>

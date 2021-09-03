@@ -1,9 +1,7 @@
 ﻿using C19Tracking.API.Domain.Services.Communication.Request;
 using C19Tracking.Domain.Models.Entities;
-using C19Tracking.Domain.Services.Communication.Response;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using C19Tracking.Domain.Services.Communication.Request;
+using System.Collections.Generic; 
 using System.Threading.Tasks;
 
 namespace C19Tracking.API.Domain.Services
@@ -11,7 +9,7 @@ namespace C19Tracking.API.Domain.Services
     public interface IWhoService
     {
         Task<Covid19Data> GetTotals();
-        Task<CovidDataByRegion> GetCaseByRegion(string regionCode);
+        Task<CovidReportDetail> GetDetailByRegion(BaseRequest<CovidReportDetailRequest> request);
         Task<List<CovidDataByRegion>> GetListCaseByRegion(); 
     }
 }

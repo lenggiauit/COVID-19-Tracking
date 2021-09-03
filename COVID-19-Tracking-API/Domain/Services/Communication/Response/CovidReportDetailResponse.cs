@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace C19Tracking.Domain.Services.Communication.Response
 {
-    public class TotalsResponse : BaseResponse<TotalsResource>
+    public class CovidReportDetailResponse : BaseResponse<CovidReportDetailResource>
     {
-        public TotalsResponse(TotalsResource resource) : base(resource)
+        public CovidReportDetailResponse(CovidReportDetailResource resource) : base(resource)
         { }
-        public TotalsResponse(string message) : base(message)
+        public CovidReportDetailResponse(string message) : base(message)
         { }
-        public TotalsResponse(bool success) : base(success)
+        public CovidReportDetailResponse(bool success) : base(success)
         { }
     }
 }

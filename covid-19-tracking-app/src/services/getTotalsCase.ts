@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ApiResponse, AppSetting } from "../type";
+import { ApiResponse, AppSetting } from "../types/type";
 import type { Covid19Data } from '../types/covid19Data';
 
 let appSetting: AppSetting = require('../appSetting.json');
@@ -11,7 +11,7 @@ export const GetTotalsCase = createApi({
         getTotalsCase: builder.query<ApiResponse<Covid19Data>, void>({
             query: () => ({
                 url: 'GetTotalsCase',
-                method: 'post'
+                method: 'get'
             }),
             transformResponse(response: ApiResponse<Covid19Data>) {
                 return response;

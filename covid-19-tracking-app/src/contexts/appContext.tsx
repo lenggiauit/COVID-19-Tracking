@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import { AppSetting } from '../type';
+import { AppSetting } from '../types/type';
 
 let appSetting: AppSetting = require('../appSetting.json');
 

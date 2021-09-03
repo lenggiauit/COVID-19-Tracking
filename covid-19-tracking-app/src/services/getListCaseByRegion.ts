@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ApiResponse, AppSetting } from "../type";
+import { ApiResponse, AppSetting } from "../types/type";
 import { Covid19DataByRegion } from '../types/covid19DataByRegion';
 
 let appSetting: AppSetting = require('../appSetting.json');
@@ -11,7 +11,7 @@ export const GetListCaseByRegion = createApi({
         GetListCaseByRegion: builder.query<ApiResponse<Covid19DataByRegion[]>, void>({
             query: () => ({
                 url: 'GetAllCaseByRegion',
-                method: 'post'
+                method: 'get'
             }),
             transformResponse(response: ApiResponse<Covid19DataByRegion[]>) {
                 return response;

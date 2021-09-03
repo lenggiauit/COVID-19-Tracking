@@ -4,6 +4,7 @@ using C19Tracking.API.Infrastructure;
 using C19Tracking.API.Persistence.Contexts;
 using C19Tracking.API.Persistence.Repositories;
 using C19Tracking.Domain.Models.Entities;
+using C19Tracking.Domain.Services.Communication.Request;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -41,6 +42,79 @@ namespace C19Tracking.Persistence.Repositories
                 _logger.LogWarning($"Cache {CacheKeys.ByRegion} is empty!");
                 return null;
             }
+        }
+
+        public async Task<CovidReportDetail> GetDetailByRegion(BaseRequest<CovidReportDetailRequest> request)
+        { 
+            string covidbyRegionJson = await _distributedCache.GetStringAsync(CacheKeys.ByRegion.ToString());
+            string vaccineJson = await _distributedCache.GetStringAsync(CacheKeys.VaccineData.ToString());
+            string covidbyDayGroupJson = await _distributedCache.GetStringAsync(CacheKeys.DayGroups.ToString());
+
+            if (!string.IsNullOrEmpty(covidbyRegionJson) && !string.IsNullOrEmpty(vaccineJson) && !string.IsNullOrEmpty(covidbyDayGroupJson))
+            {
+                CovidReportDetail covidReportDetail = new CovidReportDetail();
+                List<CovidDataByRegion> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByRegion>>(covidbyRegionJson);
+                covidReportDetail.CovidReport = covid19DataList.Where(l => l.RegionCode.Equals(request.Payload.RegionCode, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                List<VaccineData> vaccineDataList = JsonConvert.DeserializeObject<List<VaccineData>>(vaccineJson);
+
+                List<VaccineData> vaccineDataListByRegion = vaccineDataList.Where(l => l.RegionCode.Equals(request.Payload.RegionCode, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                VaccineData totalVaccineDatabyRegion = new VaccineData();
+                foreach (var item in vaccineDataListByRegion)
+                { 
+                    totalVaccineDatabyRegion.PersonFullyVaccinated += item.PersonFullyVaccinated;
+                    totalVaccineDatabyRegion.PersonVaccinated1PlusDose += item.PersonVaccinated1PlusDose; 
+                    totalVaccineDatabyRegion.VaccinesUsed = ReplaceString(totalVaccineDatabyRegion.VaccinesUsed, item.VaccinesUsed );
+                    totalVaccineDatabyRegion.TotalVaccinations += item.TotalVaccinations; 
+                }  
+
+                covidReportDetail.VaccineReport = totalVaccineDatabyRegion;
+
+                List<CovidDataByDayGroup> covidDataByDayGroupList = JsonConvert.DeserializeObject<List<CovidDataByDayGroup>>(covidbyDayGroupJson);
+
+                
+                var filter = covidDataByDayGroupList
+               .Where(l => l.ReportDate >= request.Payload.StartDate
+                 && l.RegionCode.Equals(request.Payload.RegionCode, StringComparison.OrdinalIgnoreCase))
+               .ToList();
+                 
+                covidReportDetail.CovidReportByDayRegion = filter.GroupBy(l => l.ReportDate)
+                         .Select(lg =>
+                               new CovidDataByDayRegion
+                               {
+                                   ReportDate  = lg.First().ReportDate, 
+                                   TotalDeaths = lg.Sum(w => w.Deaths), 
+                                   TotalConfirmed = lg.Sum(w => w.Confirmed), 
+                               }).ToList();
+
+
+                return covidReportDetail;
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.ByRegion} or {CacheKeys.VaccineData}  or {CacheKeys.DayGroups} is empty!");
+                return null;
+            }
+        }
+
+        private string ReplaceString(string listString,string newStrings)
+        {
+            if (!string.IsNullOrEmpty(listString))
+            {
+                foreach (var str in newStrings.Split(','))
+                {
+                    if (listString.IndexOf(str) == -1)
+                    {
+                        listString += ", " + str;
+                    }
+
+                }
+            }
+            else
+            {
+                listString = newStrings;
+            }
+            return listString;
         }
 
         public async Task<List<CovidDataByRegion>> GetListCaseByRegion()
