@@ -68,5 +68,28 @@ namespace C19Tracking.Controllers
             return new ListCaseByRegionResponse(resources);
         }
 
+        [HttpGet("GetTopByCountry")]
+        public async Task<ListCaseByCountryResponse> GetTopByCountry()
+        {
+            var listCaseByCountry = await _whoServices.GetTopByCountry();
+            var resources = _mapper.Map<List<CovidDataByCountry>, List<CovidDataByCountryResource>>(listCaseByCountry);
+            return new ListCaseByCountryResponse(resources);
+        }
+
+        [HttpPost("GetDetailByCountry")]
+        public async Task<DetailByCountryResponse> GetDetailByCountry([FromBody] BaseRequest<DetailByCountryRequest> request)
+        {
+            if (ModelState.IsValid)
+            {
+                var detailByCountry = await _whoServices.GetDetailByCountry(request);
+                var resources = _mapper.Map<CovidDataByCountry, CovidDataByCountryResource>(detailByCountry);
+                return new DetailByCountryResponse(resources);
+            }
+            else
+            {
+                return new DetailByCountryResponse(string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
+            }
+        }
+
     }
 }

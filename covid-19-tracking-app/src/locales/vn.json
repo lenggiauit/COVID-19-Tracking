@@ -25,5 +25,7 @@
     "detail": "chi tiết",
     "vaccinesUsed": "Các loại vaccines được sử dụng",
     "PersonFullyVaccinated": "Số người được tiêm chủng đầy đủ",
-    "PersonVaccinated1PlusDose": "Số người được tiêm chủng lần 1"
+    "PersonVaccinated1PlusDose": "Số người được tiêm chủng lần 1",
+    "Situation_by_WHO_TopCountries": "Top Countries",
+    "Situation_by_Current_Country": "Tình hình đất nước của bạn"
 }

@@ -3,18 +3,18 @@ import * as bt from 'react-bootstrap';
 import Layout from '../../components/layout';
 import { useAppContext } from '../../contexts/appContext';
 
-const Who: React.FC = (): ReactElement => {
+const VaccineData: React.FC = (): ReactElement => {
     const { locale, setLocale, appSetting } = useAppContext();
 
     return (
         <Layout>
             <bt.Container>
                 <bt.Row>
-                    <bt.Col>  </bt.Col>
+                    <bt.Col> Under development </bt.Col>
                 </bt.Row>
             </bt.Container>
         </Layout>
     )
 };
 
-export default Who;
+export default VaccineData;

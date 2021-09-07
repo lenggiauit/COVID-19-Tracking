@@ -1,20 +1,16 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import * as bt from 'react-bootstrap';
 import { Translation } from '../translation';
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConverterLocaleDateString from "../../utils/converter";
 import { useGetTotalsCaseQuery } from '../../services/getTotalsCase';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { GetRandomBgColor } from "../../utils/functions";
 
-
-
 const InformationAlert: React.FC = () => {
     const { data, error, isFetching, isLoading } = useGetTotalsCaseQuery();
     return (
         <>
-            <ToastContainer />
             <bt.Container>
                 <bt.Row>
                     <div className="p-1 mt-4 text-center bg-info1 bg-gradient text-white1 rounded1-1 shadow-1sm">

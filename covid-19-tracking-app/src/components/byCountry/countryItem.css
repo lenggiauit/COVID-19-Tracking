@@ -1,0 +1,11 @@
+.country-item-body:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+    cursor: pointer;
+}
+.country-item-body .progress {
+    height: 5px;
+}
+.country-container {
+    height: 690px;
+    overflow-y: auto;
+}

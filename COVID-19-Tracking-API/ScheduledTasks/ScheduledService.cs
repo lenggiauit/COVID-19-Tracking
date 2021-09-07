@@ -24,7 +24,7 @@ namespace C19Tracking.ScheduledTasks
         {
             _logger.LogInformation("Scheduled Service is running.");
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(8));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromHours(1));
             TaskFactory taskFactory = new TaskFactory();
             foreach (FlowTask flowTask in Enum.GetValues(typeof( FlowTask)))
             {

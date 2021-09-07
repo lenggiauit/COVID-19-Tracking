@@ -12,7 +12,7 @@ export const GetDetailByRegion = createApi({
     endpoints: (builder) => ({
         GetDetailByRegion: builder.query<ApiResponse<CovidReportDetail>, ApiRequest<CovidReportDetailRequest>>({
             query: (payload) => ({
-                url: 'GetDetailByRegion',
+                url: 'GetDetailByCountry',
                 method: 'post',
                 body: payload
             }),

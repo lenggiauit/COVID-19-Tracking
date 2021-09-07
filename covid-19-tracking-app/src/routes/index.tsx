@@ -11,17 +11,17 @@ const Home = lazy(() => {
     ])
         .then(([moduleExports]) => moduleExports);
 });
-const WHO = lazy(() => {
+const Country = lazy(() => {
     return Promise.all([
-        import("../views/who/"),
+        import("../views/country"),
         new Promise(resolve => setTimeout(resolve, 20))
     ])
         .then(([moduleExports]) => moduleExports);
 });
 
-const VaccineData = lazy(() => {
+const Region = lazy(() => {
     return Promise.all([
-        import("../views/vaccineData/"),
+        import("../views/region"),
         new Promise(resolve => setTimeout(resolve, 20))
     ])
         .then(([moduleExports]) => moduleExports);
@@ -36,9 +36,8 @@ const IndexRouter: React.FC = (): ReactElement => {
                 <Suspense fallback={<PageLoading />}>
                     <Switch>
                         <Route path="/" exact component={Home} />
-                        <Route path="/who" exact component={WHO} />
-                        <Route path="/vaccinedata" exact component={VaccineData} />
-
+                        <Route path="/region" exact component={Region} />
+                        <Route path="/country" exact component={Country} />
                     </Switch>
                 </Suspense>
             </Router>

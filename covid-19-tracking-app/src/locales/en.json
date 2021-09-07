@@ -25,5 +25,7 @@
     "detail": "detail",
     "vaccinesUsed": "Vaccines Used",
     "PersonFullyVaccinated": "Person Fully Vaccinated",
-    "PersonVaccinated1PlusDose": "Person Vaccinated 1Plus Dose"
+    "PersonVaccinated1PlusDose": "Person Vaccinated 1Plus Dose",
+    "Situation_by_WHO_TopCountries": "Top Countries",
+    "Situation_by_Current_Country": "Situation of your country"
 }

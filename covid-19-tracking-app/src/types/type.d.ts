@@ -38,6 +38,7 @@ export interface ApiOptions {
 export interface AppSetting {
     BaseUrl: string;
     ForceHideEnvironment: boolean;
+    CountryViaIPUrl: string;
 }
 
 export type ApiHeader = {

@@ -71,8 +71,7 @@ namespace C19Tracking.Persistence.Repositories
                 covidReportDetail.VaccineReport = totalVaccineDatabyRegion;
 
                 List<CovidDataByDayGroup> covidDataByDayGroupList = JsonConvert.DeserializeObject<List<CovidDataByDayGroup>>(covidbyDayGroupJson);
-
-                
+                 
                 var filter = covidDataByDayGroupList
                .Where(l => l.ReportDate >= request.Payload.StartDate
                  && l.RegionCode.Equals(request.Payload.RegionCode, StringComparison.OrdinalIgnoreCase))
@@ -86,8 +85,7 @@ namespace C19Tracking.Persistence.Repositories
                                    TotalDeaths = lg.Sum(w => w.Deaths), 
                                    TotalConfirmed = lg.Sum(w => w.Confirmed), 
                                }).ToList();
-
-
+                 
                 return covidReportDetail;
             }
             else
@@ -153,10 +151,35 @@ namespace C19Tracking.Persistence.Repositories
             } 
         }
 
+        public async  Task<List<CovidDataByCountry>> GetTopByCountry()
+        {
+            string jsonString = await _distributedCache.GetStringAsync(CacheKeys.TopCountryGroups.ToString());
+            if (!string.IsNullOrEmpty(jsonString))
+            {
+                List<CovidDataByCountry> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByCountry>>(jsonString);
+                return covid19DataList;
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.ByRegion} is empty!");
+                return null;
+            }
+        }
 
-
-
-
-
+        public async Task<CovidDataByCountry> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request)
+        {
+            string covidbyCountryJson = await _distributedCache.GetStringAsync(CacheKeys.ByCountry.ToString());
+            
+            if (!string.IsNullOrEmpty(covidbyCountryJson))
+            { 
+                List<CovidDataByCountry> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByCountry>>(covidbyCountryJson); 
+                return covid19DataList.Where(c=> c.CountryCode.Equals(request.Payload.CountryCode, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.ByRegion} or {CacheKeys.VaccineData}  or {CacheKeys.DayGroups} is empty!");
+                return null;
+            }
+        }
     }
 }

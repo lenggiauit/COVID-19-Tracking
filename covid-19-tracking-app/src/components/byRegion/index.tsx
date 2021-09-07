@@ -14,60 +14,50 @@ const ByRegion: React.FC = () => {
 
     const { data, error, isFetching, isLoading } = useGetListCaseByRegionQuery();
 
-    const [selectedItem, setSelectedItem] = useState<Covid19DataByRegion>();
+    const [selectedRegion, setSelectedRegion] = useState<Covid19DataByRegion>();
 
-    const selectedItemHandler = useCallback((item: Covid19DataByRegion) => {
-        setSelectedItem(item);
-    }, [selectedItem])
-
+    const selectedRegionHandler = (item: Covid19DataByRegion) => {
+        //setSelectedRegion(item);
+        window.location.href = '/region';
+    };
 
     return (
         <>
-            <bt.Container>
-                <bt.Row>
-                    <bt.Col md={4}>
-                        <h5>
-                            <Translation tid="Situation_by_WHO_Region" />
-                        </h5>
-                    </bt.Col>
-                    <bt.Col md={8}>
-                    </bt.Col>
+            <bt.Row>
+                <bt.Col >
 
-                </bt.Row>
-                <bt.Row>
-                    <bt.Col md={4}>
-                        {(isFetching || isLoading) &&
-                            <>{
-                                Array.from(Array(7).keys()).map((i) => (
-                                    <RegionItem key={uuid()} max={1} selectedItem={() => { }} />
-                                ))
-                            }
-                            </>
-                        }
-                        {error && <div>{JSON.stringify(error)}</div>}
-                        {!error && !isFetching && data?.success &&
-                            <> {
-                                data?.resource.map((item) => (
-                                    <>
-                                        <RegionItem key={uuid()} selectedItem={selectedItemHandler} data={item} max={Math.max.apply(Math, data?.resource.map(function (o) { return o.confirmed; }))} />
-                                    </>
-                                ))
-                            }
-                            </>
-                        }
-                    </bt.Col>
-                    <bt.Col md={8} className="mt-2">
-                        {(isFetching || isLoading) && <DetailLoading key={uuid()} lineCount={17} />}
-                        {!selectedItem && data?.success && data?.resource[0] && (<>
-                            <RegionDetail key={uuid()} selectedItemData={data?.resource[0]} />
-                        </>)}
-                        {selectedItem && (<>
-                            <RegionDetail key={uuid()} selectedItemData={selectedItem} />
-                        </>)}
-                    </bt.Col>
-                </bt.Row>
+                    {(isFetching || isLoading) && (
+                        <bt.Placeholder as="a" animation="glow">
+                            <bt.Placeholder xs={5} bg={GetRandomBgColor()} size="lg" />
+                        </bt.Placeholder>)}
+                    {!error && !isFetching && <h5> <Translation tid="Situation_by_WHO_Region" /> </h5>}
 
-            </bt.Container>
+                </bt.Col>
+            </bt.Row>
+            <bt.Row>
+                <bt.Col >
+                    {(isFetching || isLoading) &&
+                        <>{
+                            Array.from(Array(7).keys()).map((i) => (
+                                <RegionItem key={uuid()} max={1} selectedItem={() => { }} />
+                            ))
+                        }
+                        </>
+                    }
+                    {error && <div>{JSON.stringify(error)}</div>}
+                    {!error && !isFetching && data?.success &&
+                        <> {
+                            data?.resource.map((item) => (
+                                <>
+                                    <RegionItem key={uuid()} selectedItem={selectedRegionHandler} data={item} max={Math.max.apply(Math, data?.resource.map(function (o) { return o.confirmed; }))} />
+                                </>
+                            ))
+                        }
+                        </>
+                    }
+                </bt.Col>
+            </bt.Row>
+
         </>
     )
 }

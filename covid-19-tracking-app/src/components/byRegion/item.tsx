@@ -27,7 +27,12 @@ const RegionItem: React.FC<Props> = ({ data, max, selectedItem }) => {
                             <b><Translation tid={data.regionCode} /> </b>
                         </h5>
                         <div>
-                            <b>{data.confirmed.toLocaleString(undefined, { maximumFractionDigits: 0 })}</b>
+                            <b><span className="text-warning">
+                                {data.confirmed.toLocaleString(undefined, { maximumFractionDigits: 0 })} </span>
+                                /
+                                <span className="text-danger"> {data.deaths.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>&nbsp;
+                                (<span>{((data.deaths / data.confirmed) * 100).toFixed(2)} %</span>)
+                            </b>
                         </div>
 
                     </div>
@@ -35,7 +40,7 @@ const RegionItem: React.FC<Props> = ({ data, max, selectedItem }) => {
                         <div></div>
                         &nbsp;
                         <small style={{ fontSize: 10 }}>
-                            <Translation tid="Confirmed" />
+                            <Translation tid="Confirmed" /> / <Translation tid="Deaths" />
                         </small >
                     </div>
                     <bt.ProgressBar key={uuid()} variant={data.regionCode.toLocaleLowerCase()} now={data.confirmed == max ? 100 : (data.confirmed / max) * 100} />
@@ -64,12 +69,12 @@ const RegionItem: React.FC<Props> = ({ data, max, selectedItem }) => {
                     &nbsp;
                     <small style={{ fontSize: 10 }}>
                         <Placeholder as="a" animation="glow">
-                            <Placeholder xs={7} bg={colorRandom} size="xs" />
+                            <Placeholder xs={7} bg={colorRandom} size="sm" />
                         </Placeholder>
                     </small >
                 </div>
                 <Placeholder as="a" animation="glow">
-                    <Placeholder xs={12} bg={colorRandom} size="xs" />
+                    <Placeholder xs={12} bg={colorRandom} size="sm" />
                 </Placeholder>
             </div>
 
