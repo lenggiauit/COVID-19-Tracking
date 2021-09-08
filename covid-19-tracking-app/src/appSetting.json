@@ -1,5 +1,5 @@
 {
-    "BaseUrl": "https://localhost:5001",
+    "BaseUrl": "https://covidapi.nagistar.com",
     "ForceHideEnvironment": true,
     "CountryViaIPUrl": "http://ip-api.com/json"
 }

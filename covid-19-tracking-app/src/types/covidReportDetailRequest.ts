@@ -1,5 +1,5 @@
 export type CovidReportDetailRequest = {
     regionCode: any,
-    startDate: any,
-    endDate: any,
+    startDate?: any,
+    endDate?: any,
 };

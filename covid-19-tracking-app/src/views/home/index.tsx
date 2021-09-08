@@ -5,16 +5,30 @@ import TopCountry from '../../components/byCountry/topCountries';
 import InformationAlert from '../../components/informationAlert';
 import Layout from '../../components/layout';
 import { useAppContext } from '../../contexts/appContext';
-import CurrentCountry from '../../components/byCurrentCountry';
+import { useGetCurrentCountryQuery } from '../../services/getCurrentCountry';
+import { CurrentCountry } from '../../types/currentCountry';
+import ByCurrentCountry from '../../components/byCurrentCountry';
 
 const Home: React.FC = (): ReactElement => {
     const { locale, setLocale, appSetting } = useAppContext();
+    const getGurrentCountry = useGetCurrentCountryQuery();
 
-
+    const defaultCountry: CurrentCountry = {
+        country: "VN",
+        countryCode: "VN",
+        query: "127.0.0.1",
+    };
     return (
         <Layout>
             <InformationAlert />
-            <CurrentCountry />
+            {getGurrentCountry.isSuccess && getGurrentCountry.data && (
+                <ByCurrentCountry cc={getGurrentCountry.data} />
+            )
+            }
+            {!getGurrentCountry.isSuccess && !getGurrentCountry.data && (
+                <ByCurrentCountry cc={defaultCountry} />
+            )
+            }
             <bt.Container>
                 <bt.Row>
                     <bt.Col md={6}>

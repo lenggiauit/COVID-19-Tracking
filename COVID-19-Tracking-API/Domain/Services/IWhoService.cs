@@ -12,6 +12,8 @@ namespace C19Tracking.API.Domain.Services
         Task<CovidReportDetail> GetDetailByRegion(BaseRequest<CovidReportDetailRequest> request);
         Task<List<CovidDataByRegion>> GetListCaseByRegion();
         Task<List<CovidDataByCountry>> GetTopByCountry();
-        Task<CovidDataByCountry> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request);
+        Task<CovidReportDetail> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request);
+        Task<CovidDataByCountry> GetTotalCaseByCountry(BaseRequest<DetailByCountryRequest> request);
+        Task<List<CovidDataByRegion>> GetCountryByRegion(BaseRequest<CovidReportDetailRequest> request);
     }
 }

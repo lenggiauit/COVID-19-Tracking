@@ -4,13 +4,13 @@ import { Covid19DataByCountry, DetailByCountryRequest } from '../types/covid19Da
 
 let appSetting: AppSetting = require('../appSetting.json');
 
-export const GetByCountry = createApi({
-    reducerPath: 'GetDetailByCountry',
+export const GetTotalCaseByCountry = createApi({
+    reducerPath: 'GetTotalCaseByCountry',
     baseQuery: fetchBaseQuery({ baseUrl: appSetting.BaseUrl }),
     endpoints: (builder) => ({
-        GetByCountry: builder.query<ApiResponse<Covid19DataByCountry>, ApiRequest<DetailByCountryRequest>>({
+        GetTotalCaseByCountry: builder.query<ApiResponse<Covid19DataByCountry>, ApiRequest<DetailByCountryRequest>>({
             query: (payload) => ({
-                url: 'GetDetailByCountry',
+                url: 'GetTotalCaseByCountry',
                 method: 'post',
                 body: payload
             }),
@@ -21,4 +21,4 @@ export const GetByCountry = createApi({
     })
 });
 
-export const { useGetByCountryQuery } = GetByCountry
+export const { useGetTotalCaseByCountryQuery } = GetTotalCaseByCountry

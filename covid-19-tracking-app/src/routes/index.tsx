@@ -27,8 +27,6 @@ const Region = lazy(() => {
         .then(([moduleExports]) => moduleExports);
 });
 
-
-
 const IndexRouter: React.FC = (): ReactElement => {
     return (
         <>

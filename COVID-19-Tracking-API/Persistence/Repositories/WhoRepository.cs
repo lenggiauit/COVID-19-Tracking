@@ -77,7 +77,7 @@ namespace C19Tracking.Persistence.Repositories
                  && l.RegionCode.Equals(request.Payload.RegionCode, StringComparison.OrdinalIgnoreCase))
                .ToList();
                  
-                covidReportDetail.CovidReportByDayRegion = filter.GroupBy(l => l.ReportDate)
+                covidReportDetail.CovidReportByDay = filter.GroupBy(l => l.ReportDate)
                          .Select(lg =>
                                new CovidDataByDayRegion
                                {
@@ -166,18 +166,66 @@ namespace C19Tracking.Persistence.Repositories
             }
         }
 
-        public async Task<CovidDataByCountry> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request)
+        public async Task<CovidReportDetail> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request)
+        {  
+            string covidbyDayGroupJson = await _distributedCache.GetStringAsync(CacheKeys.DayGroups.ToString());
+
+            if (!string.IsNullOrEmpty(covidbyDayGroupJson))
+            {
+                CovidReportDetail covidReportDetail = new CovidReportDetail(); 
+                List<CovidDataByDayGroup> covidDataByDayGroupList = JsonConvert.DeserializeObject<List<CovidDataByDayGroup>>(covidbyDayGroupJson);
+
+                var filter = covidDataByDayGroupList
+               .Where(l => l.ReportDate >= request.Payload.StartDate
+                 && l.CountryCode.Equals(request.Payload.CountryCode, StringComparison.OrdinalIgnoreCase))
+               .ToList();
+
+                covidReportDetail.CovidReportByDay = filter.GroupBy(l => l.ReportDate)
+                         .Select(lg =>
+                               new CovidDataByDayRegion
+                               {
+                                   ReportDate = lg.First().ReportDate,
+                                   TotalDeaths = lg.Sum(w => w.Deaths),
+                                   TotalConfirmed = lg.Sum(w => w.Confirmed),
+                               }).ToList();
+
+                return covidReportDetail;
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.DayGroups} is empty!");
+                return null;
+            }
+        }
+
+        public async Task<CovidDataByCountry> GetTotalCaseByCountry(BaseRequest<DetailByCountryRequest> request)
         {
             string covidbyCountryJson = await _distributedCache.GetStringAsync(CacheKeys.ByCountry.ToString());
-            
+
             if (!string.IsNullOrEmpty(covidbyCountryJson))
-            { 
-                List<CovidDataByCountry> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByCountry>>(covidbyCountryJson); 
-                return covid19DataList.Where(c=> c.CountryCode.Equals(request.Payload.CountryCode, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            {
+                List<CovidDataByCountry> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByCountry>>(covidbyCountryJson);
+                return covid19DataList.Where(c => c.CountryCode.Equals(request.Payload.CountryCode, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             }
             else
             {
                 _logger.LogWarning($"Cache {CacheKeys.ByRegion} or {CacheKeys.VaccineData}  or {CacheKeys.DayGroups} is empty!");
+                return null;
+            }
+        }
+
+        public async Task<List<CovidDataByRegion>> GetCountryByRegion(BaseRequest<CovidReportDetailRequest> request)
+        {
+            string covidbyRegionJson = await _distributedCache.GetStringAsync(CacheKeys.CountryGroups.ToString());
+
+            if (!string.IsNullOrEmpty(covidbyRegionJson))
+            {
+                List<CovidDataByRegion> covid19DataList = JsonConvert.DeserializeObject<List<CovidDataByRegion>>(covidbyRegionJson);
+                return covid19DataList.Where(c => c.RegionCode.Equals(request.Payload.RegionCode, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            else
+            {
+                _logger.LogWarning($"Cache {CacheKeys.CountryGroups} is empty!");
                 return null;
             }
         }

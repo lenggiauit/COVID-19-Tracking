@@ -25,7 +25,7 @@ const InformationAlert: React.FC = () => {
                                     </>
                                 }
                                 {error && <div>{JSON.stringify(error)}</div>}
-                                {!error && !isFetching && data?.success &&
+                                {!error && !isFetching && data?.success && data?.resource != null &&
                                     <>
                                         <Translation tid="who_reported_desciption1" />
                                         {ConverterLocaleDateString(data?.resource.updatedDate)}

@@ -8,8 +8,8 @@ namespace C19Tracking.Domain.Services.Communication.Request
     public class CovidReportDetailRequest
     {
         public string RegionCode { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
     }
 }

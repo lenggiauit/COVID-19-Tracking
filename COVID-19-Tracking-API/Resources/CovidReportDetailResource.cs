@@ -9,9 +9,8 @@ namespace C19Tracking.Resources
     {
         public CovidDataByRegionResource CovidReport { get; set; }
 
-        public List<CovidDataByDayRegionResource> CovidReportByDayRegion { get; set; }
+        public List<CovidDataByDayRegionResource> CovidReportByDay { get; set; }
 
-        public TotalVaccineDataResource VaccineReport { get; set; }
-
+        public TotalVaccineDataResource VaccineReport { get; set; } 
     }
 }

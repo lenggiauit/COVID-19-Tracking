@@ -39,9 +39,19 @@ namespace C19Tracking.API.Services
             return await _whoServiceRepository.GetTopByCountry();
         }
 
-        public async Task<CovidDataByCountry> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request)
+        public async Task<CovidReportDetail> GetDetailByCountry(BaseRequest<DetailByCountryRequest> request)
         {
             return await _whoServiceRepository.GetDetailByCountry(request);
+        }
+
+        public async Task<CovidDataByCountry> GetTotalCaseByCountry(BaseRequest<DetailByCountryRequest> request)
+        {
+            return await _whoServiceRepository.GetTotalCaseByCountry(request);
+        }
+
+        public async Task<List<CovidDataByRegion>> GetCountryByRegion(BaseRequest<CovidReportDetailRequest> request)
+        {
+            return await _whoServiceRepository.GetCountryByRegion(request);
         }
     }
 }

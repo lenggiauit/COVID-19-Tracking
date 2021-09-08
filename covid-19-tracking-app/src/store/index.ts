@@ -5,8 +5,10 @@ import { GetListCaseByRegion } from '../services/getListCaseByRegion';
 import { GetDetailByRegion } from '../services/getDetailByRegion';
 import { GetTopByCountry } from '../services/getTopByCountry';
 import { GetCurrentCountry } from '../services/getCurrentCountry';
-import { GetByCountry } from '../services/getByCountry';
+import { GetTotalCaseByCountry } from '../services/getTotalCaseByCountry';
 import selectedCountryReducer from '../components/byCountry/selectedCountrySlice';
+import { GetCountriesByRegion } from '../services/getCountriesByRegion';
+import { GetDetailByCountry } from '../services/getDetailByCountry';
 
 export const store = configureStore({
     reducer: {
@@ -16,7 +18,9 @@ export const store = configureStore({
         [GetDetailByRegion.reducerPath]: GetDetailByRegion.reducer,
         [GetTopByCountry.reducerPath]: GetTopByCountry.reducer,
         [GetCurrentCountry.reducerPath]: GetCurrentCountry.reducer,
-        [GetByCountry.reducerPath]: GetByCountry.reducer,
+        [GetTotalCaseByCountry.reducerPath]: GetTotalCaseByCountry.reducer,
+        [GetCountriesByRegion.reducerPath]: GetCountriesByRegion.reducer,
+        [GetDetailByCountry.reducerPath]: GetDetailByCountry.reducer,
         selectedCountry: selectedCountryReducer,
 
     },
@@ -29,7 +33,9 @@ export const store = configureStore({
             .concat(GetDetailByRegion.middleware)
             .concat(GetTopByCountry.middleware)
             .concat(GetCurrentCountry.middleware)
-            .concat(GetByCountry.middleware);
+            .concat(GetTotalCaseByCountry.middleware)
+            .concat(GetCountriesByRegion.middleware)
+            .concat(GetDetailByCountry.middleware);
     }
 
 });

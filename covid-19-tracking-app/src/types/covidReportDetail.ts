@@ -5,5 +5,5 @@ import { VaccineData } from "./vaccineData";
 export type CovidReportDetail = {
     covidReport: Covid19DataByRegion,
     vaccineReport: VaccineData,
-    covidReportByDayRegion: Covid19DataByDayRegion[],
+    covidReportByDay: Covid19DataByDayRegion[],
 };

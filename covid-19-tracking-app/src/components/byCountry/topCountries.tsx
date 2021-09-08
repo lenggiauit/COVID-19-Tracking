@@ -19,13 +19,8 @@ const TopCountry: React.FC = () => {
     const [selectedCountry, setSelectedCountry] = useState<Covid19DataByCountry>();
     const count = useAppSelector(state => state.selectedCountry.value)
     const history = useHistory();
-
-
     const selectedCountryHandler = (item: Covid19DataByCountry) => {
-        //setSelectedCountry(item);
-        // dispatch(selectCountry());
         history.push('/country', item);
-        window.location.href = '/country';
     }
 
     return (
@@ -54,7 +49,7 @@ const TopCountry: React.FC = () => {
                         </>
                     }
                     {error && <div>{JSON.stringify(error)}</div>}
-                    {!error && !isFetching && data?.success &&
+                    {!error && !isFetching && data?.success && data?.resource != null &&
                         <> {
                             <>
                                 <Scrollbars style={{ height: 690 }}>

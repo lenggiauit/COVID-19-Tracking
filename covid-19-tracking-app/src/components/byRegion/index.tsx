@@ -6,19 +6,19 @@ import LocalSpinner from "../localSpinner";
 import { GetRandomBgColor } from '../../utils/functions';
 import RegionItem from './item';
 import { Covid19DataByRegion } from '../../types/covid19DataByRegion';
-import RegionDetail from './detail';
-import DetailLoading from './detailLoading';
 import { uuid } from 'uuidv4';
+import { useHistory } from "react-router-dom";
+
 
 const ByRegion: React.FC = () => {
 
     const { data, error, isFetching, isLoading } = useGetListCaseByRegionQuery();
 
     const [selectedRegion, setSelectedRegion] = useState<Covid19DataByRegion>();
+    const history = useHistory();
 
     const selectedRegionHandler = (item: Covid19DataByRegion) => {
-        //setSelectedRegion(item);
-        window.location.href = '/region';
+        history.push('/region', item);
     };
 
     return (
@@ -45,7 +45,7 @@ const ByRegion: React.FC = () => {
                         </>
                     }
                     {error && <div>{JSON.stringify(error)}</div>}
-                    {!error && !isFetching && data?.success &&
+                    {!error && !isFetching && data?.success && data?.resource != null &&
                         <> {
                             data?.resource.map((item) => (
                                 <>

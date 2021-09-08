@@ -1,4 +1,5 @@
 export type CurrentCountry = {
     country: string,
-    countryCode: string
+    countryCode: string,
+    query: string,
 };

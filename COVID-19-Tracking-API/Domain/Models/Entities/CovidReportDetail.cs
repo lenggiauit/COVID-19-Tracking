@@ -8,7 +8,7 @@ namespace C19Tracking.Domain.Models.Entities
     public class CovidReportDetail
     {
         public CovidDataByRegion CovidReport { get; set; }
-        public List<CovidDataByDayRegion> CovidReportByDayRegion { get; set; } 
+        public List<CovidDataByDayRegion> CovidReportByDay { get; set; } 
         public VaccineData VaccineReport { get; set; } 
     }
 }

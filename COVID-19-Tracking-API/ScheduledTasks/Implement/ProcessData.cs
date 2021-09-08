@@ -97,6 +97,13 @@ namespace C19Tracking.ScheduledTasks.Implement
                                         await _distributedCache.SetStringAsync(cacheKey.ToString(), byCountryConverter.Convert());
                                     }
                                     break;
+                                case CacheKeys.CountryGroups:
+                                    {
+                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                        CountryGroupsConverter countryGroupsConverter = new CountryGroupsConverter(jsonObject);
+                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), countryGroupsConverter.Convert());
+                                    }
+                                    break;
 
                             }
                         }

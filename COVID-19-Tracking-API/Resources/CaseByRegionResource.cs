@@ -8,5 +8,6 @@ namespace C19Tracking.Resources
     public class CaseByRegionResource : BaseResource
     {
         public string RegionCode { get; set; }
+        public string CountryCode { get; set; }
     }
 }

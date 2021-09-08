@@ -76,12 +76,12 @@ namespace C19Tracking.Controllers
             return new ListCaseByCountryResponse(resources);
         }
 
-        [HttpPost("GetDetailByCountry")]
-        public async Task<DetailByCountryResponse> GetDetailByCountry([FromBody] BaseRequest<DetailByCountryRequest> request)
+        [HttpPost("GetTotalCaseByCountry")]
+        public async Task<DetailByCountryResponse> GetTotalCaseByCountry([FromBody] BaseRequest<DetailByCountryRequest> request)
         {
             if (ModelState.IsValid)
             {
-                var detailByCountry = await _whoServices.GetDetailByCountry(request);
+                var detailByCountry = await _whoServices.GetTotalCaseByCountry(request);
                 var resources = _mapper.Map<CovidDataByCountry, CovidDataByCountryResource>(detailByCountry);
                 return new DetailByCountryResponse(resources);
             }
@@ -90,6 +90,38 @@ namespace C19Tracking.Controllers
                 return new DetailByCountryResponse(string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
             }
         }
+
+        [HttpPost("GetDetailByCountry")]
+        public async Task<CovidReportDetailResponse> GetDetailByCountry([FromBody] BaseRequest<DetailByCountryRequest> request)
+        {
+            if (ModelState.IsValid)
+            {
+                var detailByCountry = await _whoServices.GetDetailByCountry(request); 
+                var resources = _mapper.Map<CovidReportDetail, CovidReportDetailResource>(detailByCountry);
+                return new CovidReportDetailResponse(resources);
+            }
+            else
+            {
+                return new CovidReportDetailResponse(string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
+            }
+        }
+
+
+        [HttpPost("GetCountriesByRegion")]
+        public async Task<ListCaseByRegionResponse> GetCountryByRegion([FromBody] BaseRequest<CovidReportDetailRequest> request)
+        {
+            if (ModelState.IsValid)
+            {
+                var listCountryByRegion = await _whoServices.GetCountryByRegion(request);
+                var resources = _mapper.Map<List<CovidDataByRegion>, List<CaseByRegionResource>>(listCountryByRegion);
+                return new ListCaseByRegionResponse(resources);
+            }
+            else
+            {
+                return new ListCaseByRegionResponse(string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
+            }
+        }
+         
 
     }
 }
