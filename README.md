@@ -10,7 +10,14 @@ I want to develop this application because I want to see quickly report from WHO
 
 ![Tracking Covid 19](https://user-images.githubusercontent.com/7054426/131284485-2d65b2aa-4a73-44dd-a290-173761ba9b39.jpg)
 # Tracking Covid 19 UI
-![image](https://user-images.githubusercontent.com/7054426/132070692-649f89b8-18c7-42b3-bfe8-f605a71ee4e2.png)
+
+![1](https://user-images.githubusercontent.com/7054426/132496044-9701fb03-ad27-4b38-906a-af8b289a793b.jpg)
+
+![2](https://user-images.githubusercontent.com/7054426/132496061-8e9cb874-92a8-4f1d-a799-44fb73454ffd.jpg)
+
+![3](https://user-images.githubusercontent.com/7054426/132496067-6f5e6a78-6fbd-460a-91ca-0269c83e0789.jpg)
+
+
 
 
 
