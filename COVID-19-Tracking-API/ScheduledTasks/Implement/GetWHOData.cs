@@ -5,9 +5,11 @@ using C19Tracking.ScheduledTasks.Interface;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -34,7 +36,11 @@ namespace C19Tracking.ScheduledTasks.Implement
                 var rawData = jData["result"]["pageContext"]["rawDataSets"];
                 await _distributedCache.SetStringAsync(CacheRawKeys.ByDayRaw.ToString(), rawData["byDay"].ToString());
                 await _distributedCache.SetStringAsync(CacheRawKeys.ByDayCumulativeRaw.ToString(), rawData["byDayCumulative"].ToString() );
-                await _distributedCache.SetStringAsync(CacheRawKeys.DayGroupsRaw.ToString(), rawData["dayGroups"].ToString() );
+                
+                var buffer = new StringWriter(); 
+                rawData["dayGroups"].WriteTo(new JsonTextWriter(buffer));
+ 
+                await _distributedCache.SetStringAsync(CacheRawKeys.DayGroupsRaw.ToString(), buffer.ToString());
                 await _distributedCache.SetStringAsync(CacheRawKeys.CountriesDailyChangeRaw.ToString(), rawData["countriesDailyChange"].ToString());
                 await _distributedCache.SetStringAsync(CacheRawKeys.ByCountryRaw.ToString(), rawData["byCountry"].ToString());
                 await _distributedCache.SetStringAsync(CacheRawKeys.CountryGroupsRaw.ToString(), rawData["countryGroups"].ToString());
