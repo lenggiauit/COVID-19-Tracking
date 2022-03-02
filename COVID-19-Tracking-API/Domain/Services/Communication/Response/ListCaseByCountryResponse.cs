@@ -27,4 +27,28 @@ namespace C19Tracking.Domain.Services.Communication.Response
         public ListCaseByCountryResponse(bool success) : base(success)
         { }
     }
+
+
+    public class ListCasesByCountryResponse : BaseResponse<List<CasesCountryResource>>
+    {
+        public ListCasesByCountryResponse(List<CasesCountryResource> resources) : base(resources)
+        { }
+        public ListCasesByCountryResponse(string message) : base(message)
+        { }
+        public ListCasesByCountryResponse(bool success) : base(success)
+        { }
+    }
+
+
+    public class ListDeathsByCountryResponse : BaseResponse<List<DeathsCountryResource>>
+    {
+        public ListDeathsByCountryResponse(List<DeathsCountryResource> resources) : base(resources)
+        { }
+        public ListDeathsByCountryResponse(string message) : base(message)
+        { }
+        public ListDeathsByCountryResponse(bool success) : base(success)
+        { }
+    }
+
+
 }

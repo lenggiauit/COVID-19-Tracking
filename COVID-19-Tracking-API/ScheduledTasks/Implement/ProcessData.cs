@@ -83,13 +83,13 @@ namespace C19Tracking.ScheduledTasks.Implement
                                         await _distributedCache.SetStringAsync(cacheKey.ToString(), dayGroupsConverter.Convert());
                                     }
                                     break;
-                                case CacheKeys.TopCountryGroups:
-                                    {
-                                        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
-                                        TopCountryGroupsConverter topCountryGroupsConverter = new TopCountryGroupsConverter(jsonObject);
-                                        await _distributedCache.SetStringAsync(cacheKey.ToString(), topCountryGroupsConverter.Convert());
-                                    }
-                                    break;
+                                //case CacheKeys.TopCountryGroups:
+                                //    {
+                                //        var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+                                //        TopCountryGroupsConverter topCountryGroupsConverter = new TopCountryGroupsConverter(jsonObject);
+                                //        await _distributedCache.SetStringAsync(cacheKey.ToString(), topCountryGroupsConverter.Convert());
+                                //    }
+                                //    break;
                                 case CacheKeys.ByCountry:
                                     {
                                         var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);

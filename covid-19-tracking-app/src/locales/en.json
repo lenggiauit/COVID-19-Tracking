@@ -29,5 +29,16 @@
     "Situation_by_WHO_TopCountries": "Top Countries",
     "Situation_by_Current_Country": "Situation of your country",
     "page_not_found": "Page not found!",
-    "CountriesList": "Countries list"
+    "CountriesList": "Countries list",
+    "Situation_by_WHO_TopDeathsCountries": "Top Deaths Countries",
+    "Situation_by_WHO_TopCasesCountries": "Top Cases Countries",
+    "today_report": "Today:",
+    "WarningMessage": "Warning Message",
+    "MEASURES_IN_PLACE": "MEASURES IN PLACE",
+    "MASKS__1": "MASKS",
+    "TRAVEL__1": "TRAVEL",
+    "GATHERINGS__1": "GATHERINGS",
+    "SCHOOLS__1": "SCHOOLS",
+    "BUSINESSES__1": "BUSINESSES",
+    "MOVEMENTS__1": "MOVEMENTS"
 }

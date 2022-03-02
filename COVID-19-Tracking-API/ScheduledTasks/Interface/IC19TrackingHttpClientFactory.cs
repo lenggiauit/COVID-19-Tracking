@@ -14,5 +14,6 @@ namespace C19Tracking.ScheduledTasks.Interface
     {
         Task<JObject> SendAsync(string apiKey, Dictionary<string, string> headers = null);
         Task PostJsonHttpClient(string apiKey, object value);
+        Task<JObject> SendUrlAsync(string url, Dictionary<string, string> headers = null);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+
 namespace C19Tracking.API.Infrastructure
 {
     public enum CacheRawKeys 
@@ -32,17 +34,30 @@ namespace C19Tracking.API.Infrastructure
         DayGroups,
         CountriesDailyChange,
         ByCountry,
+        [Description("data.regionsWeeklyIndexed.data")]
+        RegionWeekly,
         CountryGroups,
-        TopCountryGroups,
-        ByRegion,
-        RegionGroups,
+        [Description("data.countryMapData.data")]
+        CountryMapData,
+        [Description("data.allByCountry.nodes")]
+        AllByCountry,
+        [Description("result.data.today")]
         Today,
+        [Description("data.deathsDESC.nodes")]
+        TopDeathsCountry,
+        [Description("data.casesDESC.nodes")]
+        TopCasesCountry,
+        [Description("data.byRegionTotals.data")]
+        ByRegion,
+        RegionGroups, 
         Yesterday,
         StartDate,
         EndDate,
+        [Description("data.lastUpdate.date")]
         LastUpdate,
         LastDayPerCountry,
         Last7DaysPerCountry,
+        [Description("result.data.totals")]
         Totals,
         CreatedTime,
         CountriesCurrent,
@@ -68,8 +83,8 @@ namespace C19Tracking.API.Infrastructure
                     return CacheRawKeys.ByCountryRaw;
                 case CacheKeys.CountryGroups:
                     return CacheRawKeys.CountryGroupsRaw;
-                case CacheKeys.TopCountryGroups:
-                    return CacheRawKeys.TopCountryGroupsRaw;
+                //case CacheKeys.TopCountryGroups:
+                //    return CacheRawKeys.TopCountryGroupsRaw;
                 case CacheKeys.ByRegion:
                     return CacheRawKeys.ByRegionRaw;
                 case CacheKeys.RegionGroups:

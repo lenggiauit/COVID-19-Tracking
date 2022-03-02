@@ -68,6 +68,7 @@ namespace C19Tracking.Controllers
             return new ListCaseByRegionResponse(resources);
         }
 
+        
         [HttpGet("GetTopByCountry")]
         public async Task<ListCaseByCountryResponse> GetTopByCountry()
         {
@@ -75,6 +76,23 @@ namespace C19Tracking.Controllers
             var resources = _mapper.Map<List<CovidDataByCountry>, List<CovidDataByCountryResource>>(listCaseByCountry);
             return new ListCaseByCountryResponse(resources);
         }
+
+        [HttpGet("GetTopDeathsByCountry")]
+        public async Task<ListDeathsByCountryResponse> GetTopDeathsByCountry()
+        {
+            var listCaseByCountry = await _whoServices.GetTopDeathsByCountry();
+            var resources = _mapper.Map<List<DeathsCountry>, List<DeathsCountryResource>>(listCaseByCountry);
+            return new ListDeathsByCountryResponse(resources);
+        }
+
+        [HttpGet("GetTopCasesByCountry")]
+        public async Task<ListCasesByCountryResponse> GetTopCasesByCountry()
+        {
+            var listCaseByCountry = await _whoServices.GetTopCasesByCountry();
+            var resources = _mapper.Map<List<CasesCountry>, List<CasesCountryResource>>(listCaseByCountry);
+            return new ListCasesByCountryResponse(resources);
+        }
+
 
         [HttpPost("GetTotalCaseByCountry")]
         public async Task<DetailByCountryResponse> GetTotalCaseByCountry([FromBody] BaseRequest<DetailByCountryRequest> request)

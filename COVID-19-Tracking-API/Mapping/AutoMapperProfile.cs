@@ -18,8 +18,9 @@ namespace C19Tracking.API.Mapping
             CreateMap<CovidDataByDayGroup, CovidDataByDayGroupResource>(); 
             CreateMap<CovidDataByDayRegion, CovidDataByDayRegionResource>();
             CreateMap<CovidDataByCountry, CovidDataByCountryResource>();
-
-             
+            CreateMap<TodayData, TodayDataResource>();
+            CreateMap<DeathsCountry, DeathsCountryResource>();
+            CreateMap<CasesCountry, CasesCountryResource>();
         }
     }
 }

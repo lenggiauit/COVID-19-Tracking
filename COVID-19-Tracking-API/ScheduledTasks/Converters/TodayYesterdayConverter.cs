@@ -21,9 +21,9 @@ namespace C19Tracking.ScheduledTasks.Converters
             {
                 Covid19Data covid19Data = new Covid19Data();
                 covid19Data.Deaths = _jsonObject["Deaths"];
-                covid19Data.CumulativeDeaths = _jsonObject["Cumulative Deaths"]; 
+                covid19Data.Cumulative_Deaths = _jsonObject["Cumulative Deaths"]; 
                 covid19Data.Confirmed = _jsonObject["Confirmed"];
-                covid19Data.CumulativeConfirmed = _jsonObject["Cumulative Confirmed"]; 
+                covid19Data.Cumulative_Confirmed = _jsonObject["Cumulative Confirmed"]; 
                 return JsonConvert.SerializeObject(covid19Data);
             }
             else

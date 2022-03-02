@@ -29,5 +29,16 @@
     "Situation_by_WHO_TopCountries": "Top Countries",
     "Situation_by_Current_Country": "Tình hình đất nước của bạn",
     "page_not_found": "Không tìm thấy trang!",
-    "CountriesList": "Danh sách các quốc gia"
+    "CountriesList": "Danh sách các quốc gia",
+    "Situation_by_WHO_TopDeathsCountries": "Top Deaths Countries",
+    "Situation_by_WHO_TopCasesCountries": "Top Cases Countries",
+    "today_report": "Hôm nay",
+    "WarningMessage": "Cảnh báo",
+    "MEASURES_IN_PLACE": "CÁC BIỆN PHÁP TẠI CHỖ",
+    "MASKS__1": "KHẨU TRANG",
+    "TRAVEL__1": "DU LỊCH",
+    "GATHERINGS__1": "TỤ TẬP",
+    "SCHOOLS__1": "TRƯỜNG HỌC",
+    "BUSINESSES__1": "DOANH NGHIỆP",
+    "MOVEMENTS__1": "DI CHUYỂN"
 }

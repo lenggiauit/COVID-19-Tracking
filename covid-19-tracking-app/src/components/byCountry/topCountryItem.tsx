@@ -10,6 +10,7 @@ import { Covid19DataByCountry } from '../../types/covid19DataByCountry';
 //@ts-ignore
 import ReactCountryFlag from "react-country-flag";
 import { KeyValues } from '../../locales/';
+import countriesData from "../../locales/countries.json";
 
 type Props = {
     data?: Covid19DataByCountry;
@@ -34,10 +35,10 @@ const TopCountriesItem: React.FC<Props> = ({ data, max, selectedItem }) => {
                                     width: '1.2em',
                                     height: '1.2em',
                                 }}
-                                title={KeyValues["country"][data.countryCode]}
+                                title={countriesData.filter(c => c.code == data.countryCode)[0]?.name}
                                 countryCode={data.countryCode} />&nbsp;
                             <span className="text-left" >
-                                <b>{KeyValues["country"][data.countryCode]} </b>
+                                <b>{countriesData.filter(c => c.code == data.countryCode)[0]?.name}</b>
                             </span>
                         </div>
                         <div>

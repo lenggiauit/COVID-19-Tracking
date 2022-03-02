@@ -4,7 +4,17 @@ import * as bt from 'react-bootstrap';
 import { Translation } from '../../components/translation/'
 import { LanguageSelector } from '../languageSelector';
 import { AppProvider } from '../../contexts/appContext';
+import { AutoComplete } from '../autoComplete';
+import countriesData from "../../locales/countries.json";
+import { Covid19DataByCountry } from '../../types/covid19DataByCountry';
+import { useHistory } from "react-router-dom";
+
 const Navigation: React.FC = () => {
+    const history = useHistory();
+    const searchCountryHandler = (item: Covid19DataByCountry) => {
+        history.push('/country', item);
+        history.go(0);
+    }
     return (
         <>
             <bt.Navbar collapseOnSelect variant="light" expand="lg">
@@ -15,13 +25,11 @@ const Navigation: React.FC = () => {
                         <bt.Nav>
                             <bt.Nav.Link href="/"><Translation tid="home" /></bt.Nav.Link>
                         </bt.Nav>
-                        {/* <bt.Nav>
-                            <bt.Nav.Link href="/who"><Translation tid="who" /></bt.Nav.Link>
-                        </bt.Nav>
-                        <bt.Nav>
-                            <bt.Nav.Link href="/vaccinedata"><Translation tid="vaccinedata" /></bt.Nav.Link>
-                        </bt.Nav> */}
+
                         <bt.Nav className="me-auto"></bt.Nav>
+                        <form className="form-inline my-1 my-lg-0">
+                            <AutoComplete data={countriesData} searchHandler={searchCountryHandler} />
+                        </form>
                         <LanguageSelector />
                     </bt.Navbar.Collapse>
                 </bt.Container>

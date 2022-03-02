@@ -41,6 +41,15 @@ const InformationAlert: React.FC = () => {
                     </div>
                 </bt.Row>
             </bt.Container>
+            <bt.Container>
+                <bt.Row>
+                    <bt.Col>
+                        <h5><Translation tid="today_report" /> <span className="text-warning"><b>{data?.resource.todayConfirmed.toLocaleString(undefined, { maximumFractionDigits: 0 })}</b></span> <Translation tid="Confirmed" /> / <span className="text-danger"><b>{data?.resource.todayDeaths.toLocaleString(undefined, { maximumFractionDigits: 0 })}</b></span> <Translation tid="Deaths" />
+                        </h5>
+                    </bt.Col>
+                </bt.Row>
+            </bt.Container>
+
         </>
     )
 }

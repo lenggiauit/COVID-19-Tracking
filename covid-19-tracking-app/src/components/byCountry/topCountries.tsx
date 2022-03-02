@@ -27,13 +27,7 @@ const TopCountry: React.FC = () => {
         <>
             <bt.Row>
                 <bt.Col  >
-
-                    {(isFetching || isLoading) && (
-                        <bt.Placeholder as="a" animation="glow">
-                            <bt.Placeholder xs={5} bg={GetRandomBgColor()} size="lg" />
-                        </bt.Placeholder>)}
-                    {!error && !isFetching && <h5> <Translation tid="Situation_by_WHO_TopCountries" /> </h5>}
-
+                    <h5> <Translation tid="Situation_by_WHO_TopCountries" /> </h5>
                 </bt.Col>
             </bt.Row>
             <bt.Row>

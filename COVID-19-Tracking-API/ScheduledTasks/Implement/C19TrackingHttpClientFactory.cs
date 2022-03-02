@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Net.Http.Json; 
-using Microsoft.Extensions.Logging; 
+using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -32,16 +32,13 @@ namespace C19Tracking.ScheduledTasks.Implement
         public async Task<JObject> SendAsync(string apiKey, Dictionary<string, string> headers = null)
         {
             var apiOption = _apiDataSettings.ListAPIOptions.Where(c => c.Name.Equals(apiKey)).FirstOrDefault();
-            if(apiOption != null)
+            if (apiOption != null)
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, apiOption.Url);
                 request.Headers.Add("Accept", "application/json");
                 request.Headers.Add("Accept-Encoding", "gzip, deflate, br");
                 request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0");
                 request.Headers.Add("Host", "covid19.who.int");
-                request.Headers.Add("Cookie", "_gcl_au=1.1.47565036.1629197252; _ga=GA1.2.580925355.1629197253; _clck=xk8q0c|1|ety; _gid=GA1.2.1113256994.1631064692; _gat_gtag_UA_162461105_1=1");
-
-                 
 
                 if (headers != null)
                 {
@@ -49,15 +46,78 @@ namespace C19Tracking.ScheduledTasks.Implement
                     {
                         request.Headers.Add(header.Key, header.Value);
                     }
-                } 
+                }
                 var client = _clientFactory.CreateClient();
                 client.Timeout = TimeSpan.FromMinutes(15);
-               
+
                 using var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 
                 if (response.IsSuccessStatusCode)
-                { 
-                    try  
+                {
+                    try
+                    {
+                        if (response.Content.Headers.ContentEncoding.Contains("gzip"))
+                        {
+                            using (Stream stream = await response.Content.ReadAsStreamAsync())
+                            using (GZipInputStream gzipStream = new GZipInputStream(stream))
+                            using (StreamReader streamReader = new StreamReader(gzipStream))
+                            using (JsonReader reader = new JsonTextReader(streamReader))
+                            {
+                                reader.SupportMultipleContent = true;
+                                return new JsonSerializer().Deserialize<JObject>(reader);
+                            }
+                        }
+                        else
+                        {
+                            using (Stream stream = await response.Content.ReadAsStreamAsync())
+                            using (StreamReader streamReader = new StreamReader(stream))
+                            using (JsonReader reader = new JsonTextReader(streamReader))
+                            {
+                                reader.SupportMultipleContent = true;
+                                return new JsonSerializer().Deserialize<JObject>(reader);
+                            }
+                        }
+                    }
+                    catch (NotSupportedException)
+                    {
+                        _logger.LogError("The content type is not supported.");
+                    }
+                    catch (JsonException ex)
+                    {
+                        _logger.LogError("Invalid JSON.");
+                    }
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        public async Task<JObject> SendUrlAsync(string url, Dictionary<string, string> headers = null)
+        {
+
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Accept-Encoding", "gzip, deflate, br");
+            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0");
+            request.Headers.Add("Host", "covid19.who.int");
+
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    request.Headers.Add(header.Key, header.Value);
+                }
+            }
+            var client = _clientFactory.CreateClient();
+            client.Timeout = TimeSpan.FromMinutes(15);
+
+            using var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    if (response.Content.Headers.ContentEncoding.Contains("gzip"))
                     {
                         using (Stream stream = await response.Content.ReadAsStreamAsync())
                         using (GZipInputStream gzipStream = new GZipInputStream(stream))
@@ -66,21 +126,37 @@ namespace C19Tracking.ScheduledTasks.Implement
                         {
                             reader.SupportMultipleContent = true;
                             return new JsonSerializer().Deserialize<JObject>(reader);
-                        } 
+                        }
                     }
-                    catch (NotSupportedException)  
+                    else
                     {
-                        _logger.LogError("The content type is not supported.");
+                        using (Stream stream = await response.Content.ReadAsStreamAsync()) 
+                        using (StreamReader streamReader = new StreamReader(stream))
+                        using (JsonReader reader = new JsonTextReader(streamReader))
+                        {
+                            reader.SupportMultipleContent = true;
+                            return new JsonSerializer().Deserialize<JObject>(reader);
+                        }
                     }
-                    catch (JsonException ex)  
-                    {
-                        _logger.LogError("Invalid JSON.");
-                    }
-                    return null;
-                } 
+                }
+                catch (NotSupportedException)
+                {
+                    _logger.LogError("The content type is not supported.");
+                }
+                catch (JsonException ex)
+                {
+                    _logger.LogError("Invalid JSON.");
+                }
+                return null;
             }
-            return null;
+            else
+            {
+                return null;
+            }
+
         }
+
+
         static byte[] Decompress(byte[] gzip)
         {
             using (GZipStream stream = new GZipStream(new MemoryStream(gzip), CompressionMode.Decompress))
@@ -109,7 +185,7 @@ namespace C19Tracking.ScheduledTasks.Implement
             if (apiOption != null)
             {
                 var client = _clientFactory.CreateClient();
-                var postResponse = await client.PostAsJsonAsync(apiOption.Url, value); 
+                var postResponse = await client.PostAsJsonAsync(apiOption.Url, value);
                 postResponse.EnsureSuccessStatusCode();
             }
         }

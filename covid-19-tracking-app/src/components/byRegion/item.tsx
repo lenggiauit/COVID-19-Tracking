@@ -16,7 +16,7 @@ type Props = {
 const RegionItem: React.FC<Props> = ({ data, max, selectedItem }) => {
 
     const handleClick = () => {
-        selectedItem(data)!;
+        // selectedItem(data)!;
     }
     if (data != null) {
         return (

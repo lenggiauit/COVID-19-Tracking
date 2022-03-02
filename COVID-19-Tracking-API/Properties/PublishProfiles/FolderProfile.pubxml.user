@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>E:\GitHub Projects\COVID-19-Tracking\COVID-19-Tracking-API\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
-    <History>True|2021-09-08T10:06:08.1108861Z;True|2021-09-08T10:32:49.6074840+07:00;True|2021-09-07T23:36:16.4320986+07:00;True|2021-09-04T06:34:35.3005056+07:00;True|2021-09-04T06:29:52.8902577+07:00;</History>
+    <History>True|2022-03-02T22:50:21.5260405Z;True|2022-02-23T22:32:42.3283977+07:00;True|2022-02-23T16:54:04.0304938+07:00;True|2022-01-27T15:47:21.1266757+07:00;True|2021-09-08T17:06:08.1108861+07:00;True|2021-09-08T10:32:49.6074840+07:00;True|2021-09-07T23:36:16.4320986+07:00;True|2021-09-04T06:34:35.3005056+07:00;True|2021-09-04T06:29:52.8902577+07:00;</History>
   </PropertyGroup>
 </Project>

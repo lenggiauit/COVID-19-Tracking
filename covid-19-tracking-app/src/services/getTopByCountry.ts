@@ -17,7 +17,25 @@ export const GetTopByCountry = createApi({
                 return response;
             },
         }),
+        getTopCasesByCountry: builder.query<ApiResponse<Covid19DataByCountry[]>, void>({
+            query: () => ({
+                url: 'GetTopCasesByCountry',
+                method: 'get'
+            }),
+            transformResponse(response: ApiResponse<Covid19DataByCountry[]>) {
+                return response;
+            },
+        }),
+        GetTopDeathsByCountry: builder.query<ApiResponse<Covid19DataByCountry[]>, void>({
+            query: () => ({
+                url: 'GetTopDeathsByCountry',
+                method: 'get'
+            }),
+            transformResponse(response: ApiResponse<Covid19DataByCountry[]>) {
+                return response;
+            },
+        }),
     })
 });
 
-export const { useGetTopByCountryQuery } = GetTopByCountry;
+export const { useGetTopByCountryQuery, useGetTopCasesByCountryQuery, useGetTopDeathsByCountryQuery } = GetTopByCountry;
